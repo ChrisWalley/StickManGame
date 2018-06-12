@@ -269,12 +269,12 @@ public class InteractUI extends javax.swing.JFrame
 
     private void btnBuySellActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuySellActionPerformed
     {//GEN-HEADEREND:event_btnBuySellActionPerformed
-int price;
+double price;
 Special item;
 if(isBuying)
 {
     item = e.getInventory().get(lstItems.getSelectedIndex());
-    price = item.getWorth();
+    price = item.getWorth()*1.5;
     if(p.addGold((-1)*price))
     {
     p.addToInv(item);

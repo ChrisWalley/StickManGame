@@ -21,7 +21,7 @@ public class StickMan implements java.io.Serializable
     private double maxHealth;
     private double damage = 1;
     private double armour;
-    private int gold = 0;
+    private double gold = 0;
     
     public StickMan()
     {
@@ -133,7 +133,7 @@ public class StickMan implements java.io.Serializable
         }
         return temp;
     }
-    public boolean addGold(int amount)
+    public boolean addGold(double amount)
     {
         if(gold+amount >=0)
         {
@@ -144,7 +144,7 @@ public class StickMan implements java.io.Serializable
             return false;
     }
     
-    public int getGold()
+    public double getGold()
     {
         return gold;
     }
