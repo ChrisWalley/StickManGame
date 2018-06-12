@@ -7,6 +7,7 @@ package stickmangame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +19,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -72,9 +74,9 @@ public class StickManGame
             "##                   #################",//11
             "###                  #   #############",//12
             "####           ____          #########",//13
-            "               //||                     ",//14
-            "                 ||                     ",//15
-            "               --||                       "//16
+            "               //||                   ",//14
+            "                 ||                   ",//15
+            "               --||                   "//16
         };
         
         private static Map<Coord, Special> Specials = new HashMap<>();                
@@ -702,4 +704,36 @@ public class StickManGame
            }
            return success;
     }
+    
+    public static String [] [] [] readMaps() throws FileNotFoundException
+    {
+        String [] [] [] maps = new String [2][10][17];
+        
+        int AorB = 0;
+        int OnetoX = 0;
+        int mapRow1toLength = 0;
+        
+        Scanner scFile = new Scanner(new File("maps.txt")).useDelimiter("%");
+        while(scFile.hasNext())
+        {
+            String code = scFile.next();
+            char letter = code.charAt(0);
+            if (letter == 'A')
+                AorB = 0;
+            else if(letter == 'B')
+                AorB = 1;
+            OnetoX = Integer.parseInt(""+code.charAt(1));
+            mapRow1toLength = 0;
+            Scanner inLine = new Scanner(scFile.next()).useDelimiter(",");
+            
+            while(inLine.hasNext())
+            {
+            maps[AorB][OnetoX][mapRow1toLength] = inLine.next();
+            mapRow1toLength++;
+            }
+        }        
+        return maps;
+    }
+    
+    
 }
