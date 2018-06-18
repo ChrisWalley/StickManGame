@@ -366,11 +366,13 @@ public class StickManGame
     
     public static void updateMobs()
     {
-            for(int loop = 0; loop < mobs.size(); loop ++) 
-                    {
-                        if(mobs.get(loop).getMapID().equals(currMapID))
-                              mobs.get(loop).nextPos();
-                    }
+            for (MobUnit mob : mobs)
+            {
+                if (mob.getMapID().equals(currMapID))
+                {
+                    mob.nextPos();
+                }
+            }
     }
     
     public void addMob(MobUnit c)
