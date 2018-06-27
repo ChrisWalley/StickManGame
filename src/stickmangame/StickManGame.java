@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-
+// List of chars used ◊&@×ɯ$⏚⌑℧
 /**
  *
  * @author Christopher
@@ -31,14 +33,16 @@ public class StickManGame
 {
     
         private static String [] currMap;
+        private static String [] [] [] mapsList;
         private static String currMapID;
-        private static String enemyList ="&⎶" ;
+        private static String enemyList ="&@×ɯ";
+        private static String specialList ="ɸψ⏚F";
         private static String friendList ="$" ;
         
         private static boolean isPaused = true;
         private static boolean updatesPaused = true;
 
-        private static String [] startMap = 
+      /*  private static String [] startMap = 
         {
             "##########################           #",//0
             "#####              ########       ####",//1
@@ -78,10 +82,15 @@ public class StickManGame
             "                 ||                   ",//15
             "               --||                   "//16
         };
+        */
         
         private static Map<Coord, Special> Specials = new HashMap<>();                
         private static Map<Coord, MobUnit> MobsMap = new HashMap<>();                
-        private static char inPlace = '웃';
+        private static char inPlace = getCharacterIcon();
+        private static final char CHAR_ICON = 'O';
+        private static final char SPECIAL_ICON = 'ɸ';
+        private static final char WEAPON_ICON = 'ψ';
+        private static final char ARMOUR_ICON = '⏚';
         
         public final static int HELM = 0;
         public final static int CHEST = 1;
@@ -110,7 +119,7 @@ public class StickManGame
      */
     public static void main(String[] args)
     {
-        
+        mapsList = readMaps();
         Timer timer = new Timer(750, (ActionEvent arg0) -> 
         {
             if(!(isPaused))
@@ -193,9 +202,9 @@ public class StickManGame
     {
         for(int loop = 0; loop < currMap.length; loop++)
         {
-            if(currMap[loop].contains("웃"))
+            if(currMap[loop].contains(""+getCharacterIcon()))
             {
-                return new Coord(currMap[loop].indexOf("웃"), loop);
+                return new Coord(currMap[loop].indexOf(""+getCharacterIcon()), loop);
             }
         }
         return new Coord (0,0);
@@ -237,19 +246,19 @@ public class StickManGame
     public static void placeSpecial(Special n)
     {
         Specials.put(n.Getlocation(),n);
-        setChar(n.Getlocation(),'⌑');
+        setChar(n.Getlocation(),SPECIAL_ICON);
     }
     
     public static void placeArmour(Armour n)
     {
         Specials.put(n.Getlocation(),n);
-        setChar(n.Getlocation(),'⏚');
+        setChar(n.Getlocation(),ARMOUR_ICON);
     }
     
     public static void placeWeapon(Weapon n)
     {
         Specials.put(n.Getlocation(),n);
-        setChar(n.Getlocation(),'◊');
+        setChar(n.Getlocation(),WEAPON_ICON);
     }
     
     public static void placeMob(MobUnit e)
@@ -289,30 +298,25 @@ public class StickManGame
     {
         if(!f)
          saveCurrMap();
+        
+        if(playerPos!=null)
+                    setStickman(playerPos);
+        
+        currMapID = mapNo;
+        currMap = getMap(mapNo);
+        loadSpecials(mapNo);
+        loadWeapons(mapNo);
+        loadMobs(mapNo);
+        setStickman(newPlayerPos);
+        setCharPos(newPlayerPos);
+        
+        //special stuff
         switch (mapNo)
         {
             case START_MAP:
-                if(playerPos!=null)
-                    setStickman(playerPos);
-                currMap = startMap;
-                currMapID = START_MAP;
-                loadSpecials(START_MAP);
-                loadWeapons(START_MAP);
-                loadMobs(START_MAP);
-                setStickman(newPlayerPos);
-                setCharPos(newPlayerPos);
                 break;
                 
             case LVL_2_MAP:
-                if(playerPos!=null)
-                    setStickman(playerPos);
-                currMap = lvl2Map;
-                currMapID = LVL_2_MAP;
-                loadSpecials(LVL_2_MAP);
-                loadWeapons(LVL_2_MAP);
-                loadMobs(LVL_2_MAP);
-                setStickman(newPlayerPos);
-                setCharPos(newPlayerPos);
                 Coord [] s = 
                 {
                     new Coord(0,7),new Coord(0,8),new Coord(0,9), new Coord(0,10)
@@ -325,17 +329,7 @@ public class StickManGame
     
     public static void saveCurrMap()
     {
-        switch (currMapID)
-        {
-            case START_MAP:
-                startMap = currMap;
-                break;
-                
-            case LVL_2_MAP:
-                lvl2Map = currMap;
-                break;
-                
-        }
+        setMap(currMapID, currMap);
     }
     
     public static String getNextMapID(char dir)
@@ -366,11 +360,13 @@ public class StickManGame
     
     public static void updateMobs()
     {
-            for(int loop = 0; loop < mobs.size(); loop ++) 
-                    {
-                        if(mobs.get(loop).getMapID().equals(currMapID))
-                              mobs.get(loop).nextPos();
-                    }
+            for (MobUnit mob : mobs)
+            {
+                if (mob.getMapID().equals(currMapID))
+                {
+                    mob.nextPos();
+                }
+            }
     }
     
     public void addMob(MobUnit c)
@@ -416,7 +412,7 @@ public class StickManGame
     public static void populateArrays()
     {
         //items
-        items.add(new Special("The Map of Arkangthamz", new Coord(19,8), "Map", START_MAP, 15).makeUseable());
+        items.add(new Special("The Map of Arkangthamz", new Coord(19,12), "Map", START_MAP, 15).makeUseable());
         
         //weapons
         weapons.add(new Weapon("Stone sword", new Coord(14,2), "Weapon",START_MAP, 4, 5));
@@ -448,7 +444,7 @@ public class StickManGame
     {
         char char1 = currMap[pos1.getY()].charAt(pos1.getX());
         char char2 = currMap[pos2.getY()].charAt(pos2.getX());
-        if(char1 == '웃' || char2 == '웃')
+        if(char1 == getCharacterIcon() || char2 == getCharacterIcon())
         {
              return false;
         }
@@ -557,7 +553,15 @@ public class StickManGame
         else
             return false;
     }
-    
+    public static boolean isSpecial(char c)
+    {
+        if(specialList.indexOf(c)!=-1)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
     public static boolean isPaused()
     {
         return isPaused;
@@ -645,10 +649,12 @@ public class StickManGame
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                  
                  oos.writeObject(currMap);
+                 oos.writeObject(mapsList);
                  oos.writeObject(currMapID);
-                 oos.writeObject(startMap);
-                 oos.writeObject(lvl2Map);
-                 oos.writeObject(isPaused);
+                 //oos.writeObject(startMap);
+                 //oos.writeObject(lvl2Map);
+                 oos.writeBoolean(isPaused);
+                 oos.writeBoolean(updatesPaused);
                  oos.writeObject(Specials);
                  oos.writeObject(MobsMap);
                  oos.writeObject(inPlace);
@@ -656,6 +662,8 @@ public class StickManGame
                  oos.writeObject(items);
                  oos.writeObject(weapons);
                  oos.writeObject(MainMan);
+                 oos.writeBoolean(gameStarted);
+                 oos.writeObject(mainThread);
                  
                  oos.close();
 
@@ -676,11 +684,13 @@ public class StickManGame
            {
                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Save - "+s+".sms"));
                
-               currMap = (String []) ois.readObject(); 
+               currMap = (String []) ois.readObject();
+               mapsList = (String [] [] []) ois.readObject();
                currMapID = (String) ois.readObject();
-               startMap = (String []) ois.readObject();
-               lvl2Map = (String []) ois.readObject();
+              // startMap = (String []) ois.readObject();
+              // lvl2Map = (String []) ois.readObject();
                isPaused = (boolean) ois.readObject(); 
+               updatesPaused = (boolean) ois.readObject(); 
                Specials = (Map<Coord,Special>) ois.readObject(); 
                MobsMap = (Map<Coord,MobUnit>) ois.readObject(); 
                inPlace = (char) ois.readObject(); 
@@ -688,7 +698,9 @@ public class StickManGame
                items = (ArrayList<Special>) ois.readObject(); 
                weapons = (ArrayList<Weapon>) ois.readObject(); 
                MainMan = (StickMan) ois.readObject(); 
-               
+               gameStarted = (boolean) ois.readObject(); 
+               mainThread = (UpdateThread) ois.readObject();
+
                ois.close();
                success = true;
                
@@ -705,35 +717,52 @@ public class StickManGame
            return success;
     }
     
-    public static String [] [] [] readMaps() throws FileNotFoundException
+    public static String [] [] [] readMaps()
     {
-        String [] [] [] maps = new String [2][10][17];
-        
-        int AorB = 0;
-        int OnetoX = 0;
-        int mapRow1toLength = 0;
-        
-        Scanner scFile = new Scanner(new File("maps.txt")).useDelimiter("%");
-        while(scFile.hasNext())
-        {
-            String code = scFile.next();
-            char letter = code.charAt(0);
-            if (letter == 'A')
-                AorB = 0;
-            else if(letter == 'B')
-                AorB = 1;
-            OnetoX = Integer.parseInt(""+code.charAt(1));
-            mapRow1toLength = 0;
-            Scanner inLine = new Scanner(scFile.next()).useDelimiter(",");
-            
-            while(inLine.hasNext())
-            {
-            maps[AorB][OnetoX][mapRow1toLength] = inLine.next();
-            mapRow1toLength++;
+                String [] [] [] maps = new String [2][10][17];
+                
+                int AorB = 0;
+                int OnetoX = 0;
+                int mapRow1toLength = 0;
+                
+            try {
+                Scanner scFile = new Scanner(new File("maps.txt")).useDelimiter("%");
+                while(scFile.hasNext())
+                {
+                    String code = scFile.next().trim();
+                    char letter = code.charAt(0);
+                    AorB = (letter & 31)-1;
+
+                    OnetoX = Integer.parseInt(""+code.charAt(1));
+                    mapRow1toLength = -1;
+                    Scanner inLine = new Scanner(scFile.next()).useDelimiter(",");
+                    
+                    while(inLine.hasNext())
+                    {
+                        mapRow1toLength++;
+                        maps[AorB][OnetoX][mapRow1toLength] = inLine.next().substring(1);
+                    }
+                    maps[AorB][OnetoX][mapRow1toLength] = maps[AorB][OnetoX][mapRow1toLength].substring(0,maps[AorB][OnetoX][mapRow1toLength].length()-1);
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(StickManGame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }        
         return maps;
     }
     
+    public static String [] getMap(String code)
+    {
+       return mapsList[(((code.charAt(0)) & 31)-1)][(code.charAt(1)-48)];
+    }
+    
+    public static void setMap(String code, String [] temp)
+    {
+        mapsList[(((code.charAt(0)) & 31)-1)][(code.charAt(1)-48)] = temp;
+    }
+    
+    public static char getCharacterIcon()
+    {
+        return CHAR_ICON;
+    }
     
 }

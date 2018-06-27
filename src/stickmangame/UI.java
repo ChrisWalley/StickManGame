@@ -8,6 +8,7 @@ package stickmangame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import static stickmangame.StickManGame.getCharacterIcon;
 
 /**
  *
@@ -41,10 +42,11 @@ public class UI extends javax.swing.JFrame implements KeyListener
         txaDisplay = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         txaDisplay.setEditable(false);
         txaDisplay.setColumns(20);
-        txaDisplay.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        txaDisplay.setFont(new java.awt.Font("Monospaced", 0, 13));
         txaDisplay.setRows(5);
         txaDisplay.setFocusable(false);
         jScrollPane1.setViewportView(txaDisplay);
@@ -53,28 +55,24 @@ public class UI extends javax.swing.JFrame implements KeyListener
         jpnlBackground.setLayout(jpnlBackgroundLayout);
         jpnlBackgroundLayout.setHorizontalGroup(
             jpnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jpnlBackgroundLayout.setVerticalGroup(
             jpnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,7 +220,7 @@ public class UI extends javax.swing.JFrame implements KeyListener
             {
                 map[Y] = (map[Y].substring(0,X)+StickManGame.getInPlace()+map[Y].substring(X+1));
                 char temp = map[Y].charAt(newX);
-                map[Y] = (map[Y].substring(0,newX)+"웃"+map[Y].substring(newX+1));
+                map[Y] = (map[Y].substring(0,newX)+getCharacterIcon()+map[Y].substring(newX+1));
                 StickManGame.setInPlace(temp);
                 charPos.setX(newX);
                 StickManGame.setCurrMap(map);
@@ -230,10 +228,10 @@ public class UI extends javax.swing.JFrame implements KeyListener
                 reDraw();
             }
             else
-                if((map[Y].charAt(newX)=='⌑')||(map[Y].charAt(newX)=='◊')||(map[Y].charAt(newX)=='⏚'))
+                if(StickManGame.isSpecial(map[Y].charAt(newX)))
                     {
                          if(StickManGame.foundSpecial(new Coord(newX, Y)))
-                             map[Y] = (map[Y].substring(0,newX)+"⌂"+map[Y].substring(newX+1));
+                             map[Y] = (map[Y].substring(0,newX)+" "+map[Y].substring(newX+1));
                          
                          StickManGame.setCurrMap(map);
                          reDraw();
@@ -278,7 +276,7 @@ public class UI extends javax.swing.JFrame implements KeyListener
             {
                 map[Y] = (map[Y].substring(0,X)+StickManGame.getInPlace()+map[Y].substring(X+1));
                 char temp = map[newY].charAt(X);
-                map[newY] = (map[newY].substring(0,X)+"웃"+map[newY].substring(X+1));
+                map[newY] = (map[newY].substring(0,X)+getCharacterIcon()+map[newY].substring(X+1));
                 StickManGame.setInPlace(temp);
                 charPos.setY(newY);
                 StickManGame.setCurrMap(map);
@@ -286,10 +284,10 @@ public class UI extends javax.swing.JFrame implements KeyListener
                 reDraw();
             }
             else 
-                if((map[newY].charAt(X)=='⌑')||(map[newY].charAt(X)=='◊')||(map[newY].charAt(X)=='⏚'))
+                if((StickManGame.isSpecial(map[newY].charAt(X))))
             {
                 if(StickManGame.foundSpecial(new Coord(X, newY)))
-                    map[newY] = (map[newY].substring(0,X)+"⌂"+map[newY].substring(X+1));
+                    map[newY] = (map[newY].substring(0,X)+" "+map[newY].substring(X+1));
                 
                 StickManGame.setCurrMap(map);
                 reDraw();

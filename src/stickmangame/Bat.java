@@ -25,7 +25,7 @@ public class Bat extends MobUnit
         super(p,m);
         pos1 = p;
         pos2 = p;
-        this.setIcon('⎶');
+        this.setIcon('×');
         this.setName("Bat");
         ArrayList<String> fightStr = new ArrayList <>();
         fightStr.add("The Bat scratches you with its claws");
@@ -40,7 +40,7 @@ public class Bat extends MobUnit
         super(posCoord,healthPoints,armourPoints, damagePoints,dropsMap,mapString);
         pos1 = posCoord;
         pos2 = position2;
-        this.setIcon('⎶');
+        this.setIcon('×');
         this.setName("Bat");
         ArrayList<String> fightStr = new ArrayList <>();
         fightStr.add("The Bat scratches you with its claws");

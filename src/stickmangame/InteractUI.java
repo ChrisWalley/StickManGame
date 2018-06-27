@@ -229,13 +229,17 @@ public class InteractUI extends javax.swing.JFrame
         lstPrice.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = p.getInventoryPrices();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
         lstItems.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = p.getInventoryString();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });    }//GEN-LAST:event_btnSellActionPerformed
 
@@ -247,13 +251,17 @@ public class InteractUI extends javax.swing.JFrame
         lstPrice.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = e.getInventoryPrices();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
         lstItems.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = e.getInventoryString();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
 
@@ -285,13 +293,17 @@ if(isBuying)
     lstPrice.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = e.getInventoryPrices();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
         lstItems.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = e.getInventoryString();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
     }
@@ -314,20 +326,25 @@ else
     lstPrice.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = p.getInventoryPrices();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
         lstItems.setModel(new javax.swing.AbstractListModel()
     {
         String[] strings = p.getInventoryString();
+        @Override
         public int getSize() { return strings.length; }
+        @Override
         public Object getElementAt(int i) { return strings[i]; }
     });
 }
     }//GEN-LAST:event_btnBuySellActionPerformed
 
     /**
-     * @param e enemy to fight
+     * @param en enemy to fight
+     * @param c
      */
     public static void startUI(ShopKeep en, Coord c)
     {
@@ -367,12 +384,9 @@ else
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
+        java.awt.EventQueue.invokeLater(() ->
         {
-            public void run()
-            {
-                new InteractUI().setVisible(true);
-            }
+            new InteractUI().setVisible(true);
         });
     }
     
