@@ -25,16 +25,16 @@ import javax.swing.JFrame;
 public class SavesMenu extends javax.swing.JFrame
 {
     private ArrayList<String> tempList = new ArrayList<>();
-    private String [] stringArr;
+    private String [] stringArr = StickManGame.readSaves();
     private static boolean fromMainBool = false;
     
     public SavesMenu()
     {
     try
     {
-        Scanner readFile = new Scanner(new File("SaveFiles.smm"));
-        while(readFile.hasNextLine())
-            tempList.add(readFile.nextLine());
+        Scanner readFile = new Scanner(new File("SaveFiles.smm")).useDelimiter(";");
+        while(readFile.hasNext())
+            tempList.add(readFile.next());
         
                 stringArr = new String [tempList.size()];
                 for(int loop = 0; loop <tempList.size(); loop++)
@@ -193,17 +193,17 @@ public class SavesMenu extends javax.swing.JFrame
                         tempList.remove(loop);
                     }
                 }
+            fileNames = new PrintWriter(new FileWriter("SaveFiles.smm",false));
             stringArr = new String [tempList.size()];
             for(int loop = 0; loop <tempList.size(); loop++)
             {
                 stringArr[loop] = tempList.get(loop);
-                fileNames = new PrintWriter(new FileWriter("SaveFiles.smm",false));
                 fileNames.append(stringArr[loop]);
+                fileNames.println();
             }
             if(!(stringArr.length>0))
             {
                 String [] other = {"No Save Files Found"};
-                fileNames = new PrintWriter(new FileWriter("SaveFiles.smm",false));
                 stringArr = other;
             }
             SavesList.setModel(new javax.swing.AbstractListModel()

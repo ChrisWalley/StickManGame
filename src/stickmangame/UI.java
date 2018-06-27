@@ -115,7 +115,7 @@ public class UI extends javax.swing.JFrame implements KeyListener
         java.awt.EventQueue.invokeLater(() ->
         {
             new UI().setVisible(true);
-            JOptionPane.showMessageDialog(null,"Welcome!\nUse the arrow keys to move around.\nUse \'I\' to open your inventory.");
+            JOptionPane.showMessageDialog(null,"Welcome!\nUse the arrow keys to move around.\nUse \'I\' to open your inventory.\nPress \'Esc\' to go to the menu.");
             txaDisplay.setText(StickManGame.getMapAsString());
             StickManGame.gameStarted();
             StickManGame.unPause();

@@ -34,6 +34,7 @@ public class StickManGame
     
         private static String [] currMap;
         private static String [] [] [] mapsList;
+        private static String [] savesList;
         private static String currMapID;
         private static String enemyList ="&@×ɯ";
         private static String specialList ="ɸψ⏚F";
@@ -120,6 +121,7 @@ public class StickManGame
     public static void main(String[] args)
     {
         mapsList = readMaps();
+        savesList = readSaves();
         Timer timer = new Timer(750, (ActionEvent arg0) -> 
         {
             if(!(isPaused))
@@ -642,7 +644,7 @@ public class StickManGame
            try
            {
                PrintWriter fileNames = new PrintWriter(new FileWriter("SaveFiles.smm",true));
-               fileNames.append(s+"\n");
+               fileNames.append(";"+s);
                fileNames.close();
 
                fos = new FileOutputStream("Save - "+s+".sms");
@@ -763,6 +765,35 @@ public class StickManGame
     public static char getCharacterIcon()
     {
         return CHAR_ICON;
+    }
+    
+    public static String [] readSaves()
+    {
+        ArrayList<String> list = new ArrayList<>();
+        String [] stringArr;
+        try
+    {
+        Scanner readFile = new Scanner(new File("SaveFiles.smm")).useDelimiter(";");
+        while(readFile.hasNext())
+            list.add(readFile.next());
+        
+                stringArr = new String [list.size()];
+                for(int loop = 0; loop <list.size(); loop++)
+                    stringArr[loop] = list.get(loop);
+                if(!(stringArr.length>0))
+                {
+                    String [] other = {"No Save Files Found"};
+                    stringArr = other;
+                }
+                  
+        readFile.close();
+         
+    } catch (FileNotFoundException ex)
+    {
+      String [] other = {"No Save Files Found"};
+      stringArr = other;   
+    }
+        return stringArr;
     }
     
 }
