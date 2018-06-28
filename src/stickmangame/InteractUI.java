@@ -24,7 +24,7 @@ public class InteractUI extends javax.swing.JFrame
     private static boolean isBuying = false;
 
     /**
-     * Creates new form FightUI
+     * Creates new form InteractUI
      */
     public InteractUI()
     {

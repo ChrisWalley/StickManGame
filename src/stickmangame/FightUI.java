@@ -31,7 +31,8 @@ public class FightUI extends javax.swing.JFrame
     public FightUI()
     {
         initComponents();
-        UIManager.put("ProgressBar.foreground", Color.RED);
+        UIManager.put("ProgressBar.foreground", Color.GREEN);
+        UIManager.put("ProgressBar.background", Color.GREEN);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
        
@@ -44,8 +45,7 @@ public class FightUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         jPanel1 = new javax.swing.JPanel();
@@ -86,7 +86,7 @@ public class FightUI extends javax.swing.JFrame
         PlayerHealthBar.setMaximum(100);
         PlayerHealthBar.setValue((int)(StickManGame.getCharacter().getHealth()/StickManGame.getCharacter().getMaxHealth()*100));
         PlayerHealthBar.setForeground(Color.blue);
-        PlayerHealthBar.setBackground(new java.awt.Color(51, 255, 51));
+        PlayerHealthBar.setBackground(Color.blue);
 
         lblEnemyHealth.setText("Health:");
 
@@ -103,19 +103,15 @@ public class FightUI extends javax.swing.JFrame
         lblOptions.setText("Options:");
 
         btnAttack.setText("Attack");
-        btnAttack.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAttack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAttackActionPerformed(evt);
             }
         });
 
         btnFlee.setText("Flee");
-        btnFlee.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnFlee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFleeActionPerformed(evt);
             }
         });

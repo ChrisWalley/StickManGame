@@ -5,10 +5,14 @@
  */
 package stickmangame;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import static stickmangame.PauseMenu.setTime;
 import static stickmangame.StickManGame.getCharacterIcon;
+import static stickmangame.StickManGame.getTime;
 
 /**
  *
@@ -327,6 +331,5 @@ public class UI extends javax.swing.JFrame implements KeyListener
     {
         PauseMenu PauseUI = new PauseMenu();
         StickManGame.pause();
-        PauseUI.startPauseMenu();
     }
 }
