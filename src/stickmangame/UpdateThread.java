@@ -15,30 +15,27 @@ import javax.swing.Timer;
  *
  * @author Christopher
  */
-class UpdateThread implements Runnable
-
-{
+class UpdateThread implements Runnable {
 
     private static boolean isAlive = true;
+
     @Override
-    public void run()
-    {
-        Timer timer = new Timer(250, new ActionListener() 
-        {
-             @Override
-             public void actionPerformed(ActionEvent arg0) 
-             {
-                            if(!StickManGame.areUpdatesPaused())
-                                StickManGame.updateMobs();
-                            else
-                                UI.reDraw();
-                            UI.reDraw();
-             }
-                });
-            timer.setRepeats(true);
-            timer.start();
-            
-            /*
+    public void run() {
+        Timer timer = new Timer(250, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (!StickManGame.areUpdatesPaused()) {
+                    StickManGame.updateMobs();
+                } else {
+                    UI.reDraw();
+                }
+                UI.reDraw();
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+
+        /*
         while(isAlive)
         {
             try
@@ -68,18 +65,15 @@ class UpdateThread implements Runnable
            
         }
         System.out.println("Update thread stopped");
-                    */
+         */
     }
-    
-    public void killThread()
-    {
+
+    public void killThread() {
         isAlive = false;
     }
-    
-    public void sleep(long millis) throws InterruptedException
-    {
+
+    public void sleep(long millis) throws InterruptedException {
         Thread.sleep(millis);
     }
-    
-    
+
 }

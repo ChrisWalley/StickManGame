@@ -16,8 +16,8 @@ import javax.swing.UIManager;
  *
  * @author Christopher
  */
-public class InteractUI extends javax.swing.JFrame
-{
+public class InteractUI extends javax.swing.JFrame {
+
     private static ShopKeep e;
     private static StickMan p = StickManGame.getCharacter();
     private static Coord co;
@@ -26,21 +26,18 @@ public class InteractUI extends javax.swing.JFrame
     /**
      * Creates new form InteractUI
      */
-    public InteractUI()
-    {
+    public InteractUI() {
         initComponents();
         UIManager.put("ProgressBar.foreground", Color.RED);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter()
-        {
-             @Override
-             public void windowClosing(WindowEvent e)
-             {
-                 StickManGame.unPauseWithBreak();
-                 StickManGame.setPlayer(p);
-                 dispose();
-             }
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                StickManGame.unPauseWithBreak();
+                StickManGame.setPlayer(p);
+                dispose();
+            }
         });
     }
 
@@ -226,21 +223,31 @@ public class InteractUI extends javax.swing.JFrame
         isBuying = false;
         btnBuySell.setText("Sell");
 
-        lstPrice.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = p.getInventoryPrices();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-        lstItems.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = p.getInventoryString();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
+        lstPrice.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = p.getInventoryPrices();
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        lstItems.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = p.getInventoryString();
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
     });    }//GEN-LAST:event_btnSellActionPerformed
 
     private void btnBuyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuyActionPerformed
@@ -248,106 +255,127 @@ public class InteractUI extends javax.swing.JFrame
         isBuying = true;
         btnBuySell.setText("Buy");
 
-        lstPrice.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = e.getInventoryPrices();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-        lstItems.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = e.getInventoryString();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
+        lstPrice.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = e.getInventoryPrices();
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        lstItems.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = e.getInventoryString();
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
 
     }//GEN-LAST:event_btnBuyActionPerformed
 
     private void btnLeaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLeaveActionPerformed
     {//GEN-HEADEREND:event_btnLeaveActionPerformed
-       StickManGame.unPauseWithBreak();
-       dispose();
-       StickManGame.setPlayer(p);
+        StickManGame.unPauseWithBreak();
+        dispose();
+        StickManGame.setPlayer(p);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnLeaveActionPerformed
 
     private void btnBuySellActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuySellActionPerformed
     {//GEN-HEADEREND:event_btnBuySellActionPerformed
-double price;
-Special item;
-if(isBuying)
-{
-    item = e.getInventory().get(lstItems.getSelectedIndex());
-    price = item.getWorth()*1.5;
-    if(p.addGold((-1)*price))
-    {
-    p.addToInv(item);
-    e.removeFromInv(item);
-    lblGoldAmount.setText(p.getGold()+" coins");
+        double price;
+        Special item;
+        if (isBuying) {
+            item = e.getInventory().get(lstItems.getSelectedIndex());
+            price = item.getWorth() * 1.5;
+            if (p.addGold((-1) * price)) {
+                p.addToInv(item);
+                e.removeFromInv(item);
+                lblGoldAmount.setText(p.getGold() + " coins");
 
-    
-    lstPrice.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = e.getInventoryPrices();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-        lstItems.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = e.getInventoryString();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-    }
-    else
-    {
-        JOptionPane.showMessageDialog(null, "You don't have enough gold!");
-    }
-    
-}
-else
-{
-    item = p.getInventory().get(lstItems.getSelectedIndex());
-    price = item.getWorth();
-    p.addGold(price);
-    p.removeFromInv(item);
-    e.addToInv(item);
-    lblGoldAmount.setText(p.getGold()+" coins");
-    
-    
-    lstPrice.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = p.getInventoryPrices();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-        lstItems.setModel(new javax.swing.AbstractListModel()
-    {
-        String[] strings = p.getInventoryString();
-        @Override
-        public int getSize() { return strings.length; }
-        @Override
-        public Object getElementAt(int i) { return strings[i]; }
-    });
-}
+                lstPrice.setModel(new javax.swing.AbstractListModel() {
+                    String[] strings = e.getInventoryPrices();
+
+                    @Override
+                    public int getSize() {
+                        return strings.length;
+                    }
+
+                    @Override
+                    public Object getElementAt(int i) {
+                        return strings[i];
+                    }
+                });
+                lstItems.setModel(new javax.swing.AbstractListModel() {
+                    String[] strings = e.getInventoryString();
+
+                    @Override
+                    public int getSize() {
+                        return strings.length;
+                    }
+
+                    @Override
+                    public Object getElementAt(int i) {
+                        return strings[i];
+                    }
+                });
+            } else {
+                JOptionPane.showMessageDialog(null, "You don't have enough gold!");
+            }
+
+        } else {
+            item = p.getInventory().get(lstItems.getSelectedIndex());
+            price = item.getWorth();
+            p.addGold(price);
+            p.removeFromInv(item);
+            e.addToInv(item);
+            lblGoldAmount.setText(p.getGold() + " coins");
+
+            lstPrice.setModel(new javax.swing.AbstractListModel() {
+                String[] strings = p.getInventoryPrices();
+
+                @Override
+                public int getSize() {
+                    return strings.length;
+                }
+
+                @Override
+                public Object getElementAt(int i) {
+                    return strings[i];
+                }
+            });
+            lstItems.setModel(new javax.swing.AbstractListModel() {
+                String[] strings = p.getInventoryString();
+
+                @Override
+                public int getSize() {
+                    return strings.length;
+                }
+
+                @Override
+                public Object getElementAt(int i) {
+                    return strings[i];
+                }
+            });
+        }
     }//GEN-LAST:event_btnBuySellActionPerformed
 
     /**
      * @param en enemy to fight
      * @param c
      */
-    public static void startUI(ShopKeep en, Coord c)
-    {
+    public static void startUI(ShopKeep en, Coord c) {
         e = en;
         co = c;
 // TODO add your handling code here:
@@ -357,44 +385,36 @@ else
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() ->
-        {
+        java.awt.EventQueue.invokeLater(()
+                -> {
             new InteractUI().setVisible(true);
         });
     }
-    
-    public void reload()
-    {
+
+    public void reload() {
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuy;
     private javax.swing.JButton btnBuySell;
