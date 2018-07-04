@@ -329,11 +329,10 @@ public class StickManGame {
     }
 
     public static void updateMobs() {
-        for (MobUnit mob : mobs) {
-            if (mob.getMapID().equals(currMapID)) {
-                mob.nextPos();
-            }
-        }
+        mobs.stream().filter((mob) -> (mob.getMapID().equals(currMapID))).forEachOrdered((mob) ->
+          {
+            mob.nextPos();
+          });
     }
 
     public void addMob(MobUnit c) {
@@ -341,23 +340,17 @@ public class StickManGame {
     }
 
     public static void loadSpecials(String mapID) {
-        for (Special item : items) {
-            if (item.getMapID().equals(mapID)) {
-                if (!item.isFound()) {
-                    placeSpecial(item);
-                }
-            }
-        }
+        items.stream().filter((item) -> (item.getMapID().equals(mapID))).filter((item) -> (!item.isFound())).forEachOrdered((item) ->
+          {
+            placeSpecial(item);
+          });
     }
 
     public static void loadWeapons(String mapID) {
-        for (Weapon weapon : weapons) {
-            if (weapon.getMapID().equals(mapID)) {
-                if (!weapon.isFound()) {
-                    placeWeapon(weapon);
-                }
-            }
-        }
+        weapons.stream().filter((weapon) -> (weapon.getMapID().equals(mapID))).filter((weapon) -> (!weapon.isFound())).forEachOrdered((weapon) ->
+          {
+            placeWeapon(weapon);
+          });
     }
 
     public static void loadMobs(String mapID) {
@@ -399,11 +392,7 @@ public class StickManGame {
     public static Boolean canSwapChars(Coord pos1, Coord pos2) {
         char char1 = currMap[pos1.getY()].charAt(pos1.getX());
         char char2 = currMap[pos2.getY()].charAt(pos2.getX());
-        if (char1 == getCharacterIcon() || char2 == getCharacterIcon()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(char1 == getCharacterIcon() || char2 == getCharacterIcon());
     }
 
     public static void gameStarted() {
@@ -474,27 +463,15 @@ public class StickManGame {
     }
 
     public static boolean isEnemy(char c) {
-        if (enemyList.indexOf(c) != -1) {
-            return true;
-        } else {
-            return false;
-        }
+        return enemyList.indexOf(c) != -1;
     }
 
     public static boolean isFriendly(char c) {
-        if (friendList.indexOf(c) != -1) {
-            return true;
-        } else {
-            return false;
-        }
+        return friendList.indexOf(c) != -1;
     }
 
     public static boolean isSpecial(char c) {
-        if (specialList.indexOf(c) != -1) {
-            return true;
-        } else {
-            return false;
-        }
+        return specialList.indexOf(c) != -1;
     }
 
     public static boolean isPaused() {
@@ -513,13 +490,11 @@ public class StickManGame {
 
     public static void unPauseWithBreak() {
         isPaused = false;
-        Timer timer = new Timer(1500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                updatesPaused = false;
-                System.out.println("UnPaused");
-            }
-        });
+        Timer timer = new Timer(1500, (ActionEvent arg0) ->
+          {
+            updatesPaused = false;
+            System.out.println("UnPaused");
+          });
         timer.setRepeats(false);
         timer.start();
     }
@@ -537,7 +512,7 @@ public class StickManGame {
     public static String use(Special s) {
         switch (s.getName()) {
             case ("The Map of Arkangthamz"):
-                if (currMapID == START_MAP) {
+                if (currMapID.equals(START_MAP)) {
                     Coord[] coords
                             = {
                                 new Coord(37, 7), new Coord(37, 8), new Coord(37, 9), new Coord(37, 10)
@@ -553,9 +528,10 @@ public class StickManGame {
     }
 
     public static void reveal(Coord[] s, char c) {
-        for (int loop = 0; loop < s.length; loop++) {
-            setChar(s[loop], c);
-        };
+        for (Coord item : s)
+          {
+            setChar(item, c);
+          }
 
     }
 
@@ -623,9 +599,7 @@ public class StickManGame {
 
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex);
         }
         return success;
@@ -677,7 +651,7 @@ public class StickManGame {
         ArrayList<String> list = new ArrayList<>();
         String[] stringArr;
         try {
-            Scanner readFile = new Scanner(new File("SaveFiles.smm")).useDelimiter(";");
+             Scanner readFile = new Scanner(new File("SaveFiles.smm")).useDelimiter(";");
             while (readFile.hasNext()) {
                 list.add(readFile.next());
             }
