@@ -14,25 +14,29 @@ import static stickmangame.StickManGame.*;
  *
  * @author Christopher
  */
-public class Inventory extends javax.swing.JFrame {
+public class Inventory extends javax.swing.JFrame
+  {
 
     private static StickMan p;
 
     /**
      * Creates new form Inventory
      */
-    public Inventory() {
+    public Inventory()
+      {
         p = StickManGame.getCharacter();
         initComponents();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter()
+          {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(WindowEvent e)
+              {
                 StickManGame.unPauseWithBreak();
                 dispose();
-            }
-        });
-    }
+              }
+          });
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -334,86 +338,120 @@ public class Inventory extends javax.swing.JFrame {
     private void btnEquipActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEquipActionPerformed
     {//GEN-HEADEREND:event_btnEquipActionPerformed
 
-        if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Armour.class) {
+        if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Armour.class)
+          {
             Armour a = (Armour) StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
             StickManGame.getCharacter().equip(a, a.getSlot());
-            switch (a.getSlot()) {
+            switch (a.getSlot())
+              {
                 case HELM:
-                    lstHelm.setModel(new javax.swing.AbstractListModel() {
-                        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()};
+                    lstHelm.setModel(new javax.swing.AbstractListModel()
+                      {
+                        String[] strings =
+                          {
+                            StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()
+                          };
 
-                        public int getSize() {
+                        public int getSize()
+                          {
                             return strings.length;
-                        }
+                          }
 
-                        public Object getElementAt(int i) {
+                        public Object getElementAt(int i)
+                          {
                             return strings[i];
-                        }
-                    });
+                          }
+                      });
                     break;
 
                 case CHEST:
-                    lstChest.setModel(new javax.swing.AbstractListModel() {
-                        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()};
+                    lstChest.setModel(new javax.swing.AbstractListModel()
+                      {
+                        String[] strings =
+                          {
+                            StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()
+                          };
 
-                        public int getSize() {
+                        public int getSize()
+                          {
                             return strings.length;
-                        }
+                          }
 
-                        public Object getElementAt(int i) {
+                        public Object getElementAt(int i)
+                          {
                             return strings[i];
-                        }
-                    });
+                          }
+                      });
                     break;
 
                 case LEGS:
-                    lstLegs.setModel(new javax.swing.AbstractListModel() {
-                        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()};
+                    lstLegs.setModel(new javax.swing.AbstractListModel()
+                      {
+                        String[] strings =
+                          {
+                            StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()
+                          };
 
-                        public int getSize() {
+                        public int getSize()
+                          {
                             return strings.length;
-                        }
+                          }
 
-                        public Object getElementAt(int i) {
+                        public Object getElementAt(int i)
+                          {
                             return strings[i];
-                        }
-                    });
+                          }
+                      });
                     break;
 
                 case FEET:
-                    lstFeet.setModel(new javax.swing.AbstractListModel() {
-                        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()};
+                    lstFeet.setModel(new javax.swing.AbstractListModel()
+                      {
+                        String[] strings =
+                          {
+                            StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()
+                          };
 
-                        public int getSize() {
+                        public int getSize()
+                          {
                             return strings.length;
-                        }
+                          }
 
-                        public Object getElementAt(int i) {
+                        public Object getElementAt(int i)
+                          {
                             return strings[i];
-                        }
-                    });
+                          }
+                      });
                     break;
-            }
+              }
             txaAction.setText("Equipped " + a.getName());
-        } else if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Weapon.class) {
+          } else if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Weapon.class)
+          {
             Weapon a = (Weapon) StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
             StickManGame.getCharacter().setWeapon(a);
-            lstWeapon.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getWeapon().getName()};
+            lstWeapon.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getWeapon().getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Equipped " + a.getName());
 
-        } else {
+          } else
+          {
             txaAction.setText("You cannot equip this item!");
-        }
+          }
 
         reload();
 // TODO add your handling code here:
@@ -421,77 +459,112 @@ public class Inventory extends javax.swing.JFrame {
 
     private void btnUnequipActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipActionPerformed
     {//GEN-HEADEREND:event_btnUnequipActionPerformed
-        if (!lstHelm.isSelectionEmpty()) {
+        if (!lstHelm.isSelectionEmpty())
+          {
             StickManGame.getCharacter().unEquip(HELM);
-            lstHelm.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()};
+            lstHelm.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Un-equipped Helm");
-        } else if (!lstChest.isSelectionEmpty()) {
+          } else if (!lstChest.isSelectionEmpty())
+          {
             StickManGame.getCharacter().unEquip(CHEST);
-            lstChest.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()};
+            lstChest.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Un-equipped Chestpiece");
-        } else if (!lstLegs.isSelectionEmpty()) {
+          } else if (!lstLegs.isSelectionEmpty())
+          {
             StickManGame.getCharacter().unEquip(LEGS);
-            lstLegs.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()};
+            lstLegs.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Un-equipped Leggings");
-        } else if (!lstFeet.isSelectionEmpty()) {
+          } else if (!lstFeet.isSelectionEmpty())
+          {
             StickManGame.getCharacter().unEquip(FEET);
-            lstFeet.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()};
+            lstFeet.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Un-equipped Boots");
-        } else if (!lstWeapon.isSelectionEmpty()) {
+          } else if (!lstWeapon.isSelectionEmpty())
+          {
             StickManGame.getCharacter().unEquipWeapon();
-            lstWeapon.setModel(new javax.swing.AbstractListModel() {
-                String[] strings = {StickManGame.getCharacter().getWeapon().getName()};
+            lstWeapon.setModel(new javax.swing.AbstractListModel()
+              {
+                String[] strings =
+                  {
+                    StickManGame.getCharacter().getWeapon().getName()
+                  };
 
-                public int getSize() {
+                public int getSize()
+                  {
                     return strings.length;
-                }
+                  }
 
-                public Object getElementAt(int i) {
+                public Object getElementAt(int i)
+                  {
                     return strings[i];
-                }
-            });
+                  }
+              });
             txaAction.setText("Un-equipped Weapon");
-        }
+          }
         reload();
     }//GEN-LAST:event_btnUnequipActionPerformed
 
@@ -499,11 +572,13 @@ public class Inventory extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_btnUseActionPerformed
 
         Special e = StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
-        if (e.isUsable()) {
+        if (e.isUsable())
+          {
             txaAction.setText(StickManGame.use(e));
-        } else {
+          } else
+          {
             txaAction.setText("You cannot use this item");
-        }
+          }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUseActionPerformed
 
@@ -515,43 +590,54 @@ public class Inventory extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void startUI() {
+    public static void startUI()
+      {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+          {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+              {
+                if ("Nimbus".equals(info.getName()))
+                  {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
+                  }
+              }
+          } catch (ClassNotFoundException ex)
+          {
             java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+          } catch (InstantiationException ex)
+          {
             java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+          } catch (IllegalAccessException ex)
+          {
             java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+          } catch (javax.swing.UnsupportedLookAndFeelException ex)
+          {
             java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+          }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+          {
+            public void run()
+              {
                 new Inventory().setVisible(true);
-            }
-        });
-    }
+              }
+          });
+      }
 
-    public static void reload() {
+    public static void reload()
+      {
         lblArmourPoints.setText("" + p.getArmour());
         lblDamagePoints.setText("" + p.getDamage());
         lblHealthPoints.setText("" + p.getHealth());
-    }
+      }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,8 @@ import java.util.Map;
  *
  * @author Christopher
  */
-public class MobUnit implements java.io.Serializable {
+public class MobUnit implements java.io.Serializable
+  {
 
     private Coord pos;
     private String map;
@@ -24,12 +25,14 @@ public class MobUnit implements java.io.Serializable {
     private char icon = '&';
     private double damage;
     private Map<Double, Special> drops = new HashMap<>();
-    private int ID = (int) Math.round(Math.random() * 100);
+    private final int ID;
     private boolean isAlive = true;
     private String name = "Enemy";
     private ArrayList<String> fightString = new ArrayList<>();
 
-    public MobUnit(Coord position, String mapString) {
+    public MobUnit(Coord position, String mapString)
+      {
+        this.ID = (int) Math.round(Math.random() * 100);
         pos = position;
         health = 10;
         armour = 0;
@@ -37,173 +40,231 @@ public class MobUnit implements java.io.Serializable {
         map = mapString;
         this.setDefaultDrops();
         fightString.add("The Enemy gives you a bad look");
-    }
+      }
 
-    public MobUnit(Coord posCoord, double healthPoints, double armourPoints, double damagePoints, Map dropsMap, String mapString) {
+    public MobUnit(Coord posCoord, double healthPoints, double armourPoints, double damagePoints, Map dropsMap, String mapString)
+      {
+        this.ID = (int) Math.round(Math.random() * 100);
         pos = posCoord;
         health = healthPoints;
         maxHealth = healthPoints;
         armour = armourPoints;
         damage = damagePoints;
-        if (dropsMap != null) {
+        if (dropsMap != null)
+          {
             drops = dropsMap;
-        } else {
+          } else
+          {
             setDefaultDrops();
-        }
+          }
         map = mapString;
-    }
+      }
 
-    public void setHealth(double d) {
+    public void setHealth(double d)
+      {
         health = d;
-    }
+      }
 
-    public void setIcon(char s) {
+    public void setIcon(char s)
+      {
         icon = s;
-    }
+      }
 
-    public char getIcon() {
+    public char getIcon()
+      {
         return icon;
-    }
+      }
 
-    public double getHealth() {
+    public double getHealth()
+      {
         return health;
-    }
+      }
 
-    public void setArmour(double a) {
+    public void setArmour(double a)
+      {
         armour = a;
-    }
+      }
 
-    public double getArmour() {
+    public double getArmour()
+      {
         return armour;
-    }
+      }
 
-    public void setDrops(Map s) {
+    public void setDrops(Map s)
+      {
         drops = s;
-    }
+      }
 
-    public Map<Double, Special> getDrops() {
+    public Map<Double, Special> getDrops()
+      {
         return drops;
-    }
+      }
 
-    public void setPos(Coord c) {
+    public void setPos(Coord c)
+      {
         pos = c;
-    }
+      }
 
-    public Coord getPos() {
+    public Coord getPos()
+      {
         return pos;
-    }
+      }
 
-    public void nextPos() {
+    public void nextPos()
+      {
         pos = pos;
-    }
+      }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+      {
         return (ID * ID) / 31;
-    }
+      }
 
-    public boolean equals(MobUnit obj) {
-        if (this.hashCode() == obj.hashCode()) {
+    @Override
+    public boolean equals(Object obj)
+      {
+        if (this == obj)
+          {
             return true;
-        } else {
+          }
+        if (obj == null)
+          {
             return false;
-        }
-    }
+          }
+        if (getClass() != obj.getClass())
+          {
+            return false;
+          }
+        final MobUnit other = (MobUnit) obj;
+        return this.ID == other.ID;
+      }
 
-    public void kill() {
+    public boolean equals(MobUnit obj)
+      {
+        return this.hashCode() == obj.hashCode();
+      }
+
+    public void kill()
+      {
         isAlive = false;
-    }
+      }
 
-    public void setMap(String s) {
+    public void setMap(String s)
+      {
         map = s;
-    }
+      }
 
-    public String getMapID() {
+    public String getMapID()
+      {
         return map;
-    }
+      }
 
-    public void setDefaultDrops() {
+    public void setDefaultDrops()
+      {
         Map<Double, Special> tempDrops = new HashMap<>();
         setDrops(tempDrops);
-    }
+      }
 
-    public int getID() {
+    public int getID()
+      {
         return ID;
-    }
+      }
 
-    public String getName() {
+    public String getName()
+      {
         return name;
-    }
+      }
 
-    public void setName(String nameString) {
+    public void setName(String nameString)
+      {
         name = nameString;
-    }
+      }
 
-    public Coord[] getAllPos() {
-        Coord[] temp = {pos};
+    public Coord[] getAllPos()
+      {
+        Coord[] temp =
+          {
+            pos
+          };
         return temp;
-    }
+      }
 
-    public int getCurrPosIndex() {
+    public int getCurrPosIndex()
+      {
         return 0;
-    }
+      }
 
-    public Coord getCurrPos() {
+    public Coord getCurrPos()
+      {
         return pos;
-    }
+      }
 
-    public double getMaxHealth() {
+    public double getMaxHealth()
+      {
         return maxHealth;
-    }
+      }
 
-    public void setMaxHealth(double h) {
+    public void setMaxHealth(double h)
+      {
         maxHealth = h;
-    }
+      }
 
-    public double getDamage() {
+    public double getDamage()
+      {
         return damage;
-    }
+      }
 
-    public void setDamage(double d) {
+    public void setDamage(double d)
+      {
         damage = d;
-    }
+      }
 
-    public void addHealth(double h) {
+    public void addHealth(double h)
+      {
         health = health + h;
-    }
+      }
 
-    public void setFightString(ArrayList<String> s) {
+    public void setFightString(ArrayList<String> s)
+      {
         fightString = s;
-    }
+      }
 
-    public String getFightString(int i) {
+    public String getFightString(int i)
+      {
 
         return fightString.get(i);
-    }
+      }
 
-    public ArrayList<Special> getDropsArray() {
+    public ArrayList<Special> getDropsArray()
+      {
         ArrayList<Special> list = new ArrayList<>();
         int place = 0;
-        for (Map.Entry<Double, Special> entry : drops.entrySet()) {
+        for (Map.Entry<Double, Special> entry : drops.entrySet())
+          {
             double chance = Math.random() * 100;
-            if (chance <= entry.getKey()) {
+            if (chance <= entry.getKey())
+              {
                 list.add(place, entry.getValue());
                 place++;
-            }
-        }
+              }
+          }
         return list;
-    }
+      }
 
-    public boolean isAlive() {
+    public boolean isAlive()
+      {
         return isAlive;
-    }
+      }
 
-    public int lootedGold() {
+    public int lootedGold()
+      {
         return GOLDPRICE;
-    }
+      }
 
-    public void setPrice(int i) {
+    public void setPrice(int i)
+      {
         GOLDPRICE = i;
-    }
+      }
 
-}
+  }

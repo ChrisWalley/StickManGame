@@ -5,41 +5,36 @@
  */
 package stickmangame;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import static stickmangame.StickManGame.getTime;
 
 /**
  *
  * @author Christopher
  */
 public class PauseMenu extends javax.swing.JFrame
-{
+  {
 
     /**
      * Creates new form pauseMenu
      */
     public PauseMenu()
-    {
-       
+      {
+
         initComponents();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter()
-        {
-             @Override
-             public void windowClosing(WindowEvent e)
-             {
-                 StickManGame.unPauseWithBreak();
-                 dispose();
-             }
-        });
-    }
+          {
+            @Override
+            public void windowClosing(WindowEvent e)
+              {
+                StickManGame.unPauseWithBreak();
+                dispose();
+              }
+          });
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,71 +119,71 @@ public class PauseMenu extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-    StickManGame.unPauseWithBreak();
-    this.dispose();// TODO add your handling code here:
+        StickManGame.unPauseWithBreak();
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSaveActionPerformed
     {//GEN-HEADEREND:event_btnSaveActionPerformed
-StickManGame.Save(JOptionPane.showInputDialog("Enter the name of your save"));        // TODO add your handling code here:
+        StickManGame.Save(JOptionPane.showInputDialog("Enter the name of your save"));        // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-SavesMenu.StartUI(false);
+        SavesMenu.StartUI(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void startPauseMenu()
-    {
+      {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try
-        {
+          {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
+              {
                 if ("Nimbus".equals(info.getName()))
-                {
+                  {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
-            }
-        } catch (ClassNotFoundException ex)
-        {
+                  }
+              }
+          } catch (ClassNotFoundException ex)
+          {
             java.util.logging.Logger.getLogger(PauseMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+          } catch (InstantiationException ex)
+          {
             java.util.logging.Logger.getLogger(PauseMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+          } catch (IllegalAccessException ex)
+          {
             java.util.logging.Logger.getLogger(PauseMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+          } catch (javax.swing.UnsupportedLookAndFeelException ex)
+          {
             java.util.logging.Logger.getLogger(PauseMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+          }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable()
-        {
+          {
             public void run()
-            {
+              {
                 new PauseMenu().setVisible(true);
-            }
-        });
-    }
+              }
+          });
+      }
 
     public static void setTime(String s)
-    {
-        lblTime.setText("⌚ "+s);
-    }
-    
+      {
+        lblTime.setText("⌚ " + s);
+      }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;

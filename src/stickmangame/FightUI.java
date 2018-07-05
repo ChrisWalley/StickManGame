@@ -18,7 +18,8 @@ import javax.swing.UIManager;
  * @author Christopher
  */
 public class FightUI extends javax.swing.JFrame
-{
+  {
+
     private static MobUnit e;
     private static StickMan p;
     private static String fightText = "";
@@ -29,14 +30,14 @@ public class FightUI extends javax.swing.JFrame
      * Creates new form FightUI
      */
     public FightUI()
-    {
+      {
         initComponents();
         UIManager.put("ProgressBar.foreground", Color.GREEN);
         UIManager.put("ProgressBar.background", Color.GREEN);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-       
-    }
+
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,41 +222,40 @@ public class FightUI extends javax.swing.JFrame
 
     private void btnAttackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAttackActionPerformed
     {//GEN-HEADEREND:event_btnAttackActionPerformed
-        double resEnDam = Math.round(((e.getDamage()*(e.getHealth()/e.getMaxHealth()))/2)+(e.getDamage()/2));
-        double resDam = Math.round(((p.getDamage()*(p.getHealth()/p.getMaxHealth()))/2)+(p.getDamage()/2));
+        double resEnDam = Math.round(((e.getDamage() * (e.getHealth() / e.getMaxHealth())) / 2) + (e.getDamage() / 2));
+        double resDam = Math.round(((p.getDamage() * (p.getHealth() / p.getMaxHealth())) / 2) + (p.getDamage() / 2));
         double multi = 1.0;
         double multi2 = 1.0;
-        
+
         p.addHealth((-resEnDam));
         e.addHealth(-resDam);
-        
-        int StrAndDMG = (int)Math.round(Math.random()*2);
-        
-        switch(StrAndDMG)
-        {
+
+        int StrAndDMG = (int) Math.round(Math.random() * 2);
+
+        switch (StrAndDMG)
+          {
             case 2:
                 multi = 0.5;
                 break;
             case 3:
                 multi = 1.5;
                 break;
-        }
-        int Arm = (int)Math.round(Math.random()*2);
-        
-        switch(Arm)
-        {
+          }
+        int Arm = (int) Math.round(Math.random() * 2);
+
+        switch (Arm)
+          {
             case 2:
                 multi2 = 0.5;
                 break;
             case 3:
                 multi2 = 1.5;
                 break;
-        }
-        
-        
-        fightText = ("You attack the "+e.getName()+" for "+Math.round(resDam*multi)+
-                " damage\n"+e.getFightString(StrAndDMG)+"\nIt deals "+Math.round(resEnDam*multi2)+" damage");
-        
+          }
+
+        fightText = ("You attack the " + e.getName() + " for " + Math.round(resDam * multi)
+                + " damage\n" + e.getFightString(StrAndDMG) + "\nIt deals " + Math.round(resEnDam * multi2) + " damage");
+
         reload();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAttackActionPerformed
@@ -272,7 +272,7 @@ public class FightUI extends javax.swing.JFrame
      * @param c Coords of enemy
      */
     public static void startFightUI(MobUnit en, Coord c)
-    {
+      {
         e = en;
         co = c;
         p = StickManGame.getCharacter();// TODO add your handling code here:
@@ -283,98 +283,94 @@ public class FightUI extends javax.swing.JFrame
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try
-        {
+          {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
+              {
                 if ("Nimbus".equals(info.getName()))
-                {
+                  {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
-            }
-        } catch (ClassNotFoundException ex)
-        {
+                  }
+              }
+          } catch (ClassNotFoundException ex)
+          {
             java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+          } catch (InstantiationException ex)
+          {
             java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+          } catch (IllegalAccessException ex)
+          {
             java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+          } catch (javax.swing.UnsupportedLookAndFeelException ex)
+          {
             java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+          }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable()
-        {
+          {
             public void run()
-            {
+              {
                 new FightUI().setVisible(true);
                 lblEnemy.setText(e.getName());
-                lblEnemyHP.setText(""+e.getHealth());
-                lblEnemyAP.setText(""+e.getArmour());
-            }
-        });
-    }
-    
+                lblEnemyHP.setText("" + e.getHealth());
+                lblEnemyAP.setText("" + e.getArmour());
+              }
+          });
+      }
+
     public void reload()
-    {
-        lblEnemyHP.setText(""+Math.round(e.getHealth() * 100.0) / 100.0);
-        lblPlayerHP.setText(""+Math.round(p.getHealth() * 100.0) / 100.0);
-        PlayerHealthBar.setValue((int)(p.getHealth()/p.getMaxHealth()*100));
-        enemyHealthBar.setValue((int)(e.getHealth()/e.getMaxHealth()*100));
+      {
+        lblEnemyHP.setText("" + Math.round(e.getHealth() * 100.0) / 100.0);
+        lblPlayerHP.setText("" + Math.round(p.getHealth() * 100.0) / 100.0);
+        PlayerHealthBar.setValue((int) (p.getHealth() / p.getMaxHealth() * 100));
+        enemyHealthBar.setValue((int) (e.getHealth() / e.getMaxHealth() * 100));
         txaFightText.setText(fightText);
 
-        if(e.getHealth()<=0 && p.getHealth()<=0)
-        {
-            JOptionPane.showMessageDialog(null,"Both you and the "+e.getName()+" deal a devastating blow at the same time.\nNear death, you manage to escape to safety, \nleaving the spoils of the fight");
+        if (e.getHealth() <= 0 && p.getHealth() <= 0)
+          {
+            JOptionPane.showMessageDialog(null, "Both you and the " + e.getName() + " deal a devastating blow at the same time.\nNear death, you manage to escape to safety, \nleaving the spoils of the fight");
             e.kill();
             endFight();
             fightResult = "BD";
-        } 
-        
-        else if(e.getHealth()<=0)
-        {
+          } else if (e.getHealth() <= 0)
+          {
             ArrayList<Special> loot = e.getDropsArray();
-            JOptionPane.showMessageDialog(null,"You deal a fatal blow to the "+e.getName());
-            if(loot.size()>0)
-            {
+            JOptionPane.showMessageDialog(null, "You deal a fatal blow to the " + e.getName());
+            if (loot.size() > 0)
+              {
                 String lootString = "You have looted:";
-                for(int loop = 0; loop < loot.size(); loop++)
-                {
+                for (int loop = 0; loop < loot.size(); loop++)
+                  {
                     p.addToInv(loot.get(loop));
-                    lootString = lootString+"\n"+loot.get(loop).getName()+" ("+loot.get(loop).getType()+")";
-                }
+                    lootString = lootString + "\n" + loot.get(loop).getName() + " (" + loot.get(loop).getType() + ")";
+                  }
                 int gold = e.lootedGold();
                 p.addGold(gold);
-                lootString = lootString+"\nAnd "+gold+" gold coins.";
+                lootString = lootString + "\nAnd " + gold + " gold coins.";
 
-            JOptionPane.showMessageDialog(null,lootString);
-            }
+                JOptionPane.showMessageDialog(null, lootString);
+              }
             e.kill();
             endFight();
             fightResult = "Won";
-        }
-        else if(p.getHealth()<=0)
-        {
-            JOptionPane.showMessageDialog(null,"The "+e.getName()+" deals a devastating blow.\nNear death, you manage to escape to safety.");
+          } else if (p.getHealth() <= 0)
+          {
+            JOptionPane.showMessageDialog(null, "The " + e.getName() + " deals a devastating blow.\nNear death, you manage to escape to safety.");
             endFight();
             fightResult = "Lost";
-        }
-    }
+          }
+      }
 
-    
     public void endFight()
-    {
+      {
         StickManGame.setPlayer(p);
         StickManGame.setMob(e, co);
         dispose();
         StickManGame.unPauseWithBreak();
-    }
-    
+      }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JProgressBar PlayerHealthBar;
     private javax.swing.JButton btnAttack;
