@@ -24,7 +24,6 @@ public class Armour extends Special
 
     public Armour()
       {
-        //this.setName("");
       }
 
     public Armour(String name, String type, int slotInt, int aP, int price)
