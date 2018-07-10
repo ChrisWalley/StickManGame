@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 // List of chars used ◊&@×ɯ$⏚⌑℧
-
+//rRG8ewm2weDfsYayCkrY_A
 /**
  *
  * @author Christopher
@@ -44,48 +44,6 @@ public class StickManGame
 
     private static boolean isPaused = true;
     private static boolean updatesPaused = true;
-
-    /*  private static String [] startMap = 
-        {
-            "##########################           #",//0
-            "#####              ########       ####",//1
-            "#####              ########       ####",//2
-            "##             #############   #######",//3
-            "                ######################",//4
-            "                 #####################",//5
-            "#                            #########",//6
-            "##                                    ",//7
-            "##                                    ",//8
-            "##                                    ",//9
-            "###                                   ",//10
-            "###                            #######",//11
-            "#                            #########",//12
-            "##                  ###   ############",//13
-            "##                ######              ",//14
-            "#                  ###                ",//15
-            "##                                    "//16
-        };
-        private static String [] lvl2Map = 
-            {
-            "#######          #####    ############",//0
-            "#####           ########              ",//1
-            "###              ##### # ###          ",//2
-            "##                 ##                 ",//3
-            "##                                  ##",//4
-            "##                                 ###",//5
-            "##                               #### ",//6
-            "                                 #####",//7
-            "                                ######",//8
-            "                              ####### ",//9
-            "                   ###################",//10
-            "##                   #################",//11
-            "###                  #   #############",//12
-            "####           ____          #########",//13
-            "               //||                   ",//14
-            "                 ||                   ",//15
-            "               --||                   "//16
-        };
-     */
     private static Map<Coord, Special> Specials = new HashMap<>();
     private static Map<Coord, MobUnit> MobsMap = new HashMap<>();
     private static char inPlace = getCharacterIcon();
@@ -112,7 +70,6 @@ public class StickManGame
     private static StickMan MainMan = new StickMan();
 
     private static boolean gameStarted = false;
-    private static UpdateThread mainThread;
 
     /**
      * @param args the command line arguments
@@ -127,9 +84,7 @@ public class StickManGame
             if (!(isPaused))
               {
                 if (!StickManGame.areUpdatesPaused())
-                  {
                     StickManGame.updateMobs();
-                  }
                 UI.reDraw();
               }
           });
@@ -418,6 +373,8 @@ public class StickManGame
         weapons.add(new Weapon("Stone sword", new Coord(14, 2), "Weapon", START_MAP, 4, 5));
 
         //armour
+        
+        
         //mobs
         mobs.add(new Bat(new Coord(3, 9), 10, 0, 5, null, START_MAP, new Coord(3, 10)));
         mobs.add((new Bat(new Coord(34, 1), 10, 0, 5, null, LVL_2_MAP, new Coord(35, 1))).addDrop(100.00, new Special("Old silver key", "Key", 2)));
@@ -643,7 +600,6 @@ public class StickManGame
                 oos.writeObject(weapons);
                 oos.writeObject(MainMan);
                 oos.writeBoolean(gameStarted);
-                oos.writeObject(mainThread);
               }
 
           } catch (FileNotFoundException ex)
@@ -678,7 +634,6 @@ public class StickManGame
                 weapons = (ArrayList<Weapon>) ois.readObject();
                 MainMan = (StickMan) ois.readObject();
                 gameStarted = (boolean) ois.readObject();
-                mainThread = (UpdateThread) ois.readObject();
               }
             success = true;
 
