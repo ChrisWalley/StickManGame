@@ -82,9 +82,21 @@ public class ShopKeep extends MobUnit
         for (int loop = 0; loop < invArr.length; loop++)
           {
             Special tempSpec = (Special) invArr[loop];
-            temp[loop] = ("" + tempSpec.getWorth());
+            temp[loop] = ("" + tempSpec.getWorth() * 1.5);
           }
         return temp;
       }
 
+    public String[] getInventoryNameAndPrice()
+      {
+        Object[] invArr = inventory.toArray();
+        String[] temp = new String[invArr.length];
+
+        for (int loop = 0; loop < invArr.length; loop++)
+          {
+            Special tempSpec = (Special) invArr[loop];
+            temp[loop] = (tempSpec.getName() + " - \t" + tempSpec.getWorth());
+          }
+        return temp;
+      }
   }

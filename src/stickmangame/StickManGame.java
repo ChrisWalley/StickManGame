@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 // List of chars used ◊&@×ɯ$⏚⌑℧
 //rRG8ewm2weDfsYayCkrY_A
+
 /**
  *
  * @author Christopher
@@ -84,7 +85,9 @@ public class StickManGame
             if (!(isPaused))
               {
                 if (!StickManGame.areUpdatesPaused())
+                  {
                     StickManGame.updateMobs();
+                  }
                 UI.reDraw();
               }
           });
@@ -373,8 +376,6 @@ public class StickManGame
         weapons.add(new Weapon("Stone sword", new Coord(14, 2), "Weapon", START_MAP, 4, 5));
 
         //armour
-        
-        
         //mobs
         mobs.add(new Bat(new Coord(3, 9), 10, 0, 5, null, START_MAP, new Coord(3, 10)));
         mobs.add((new Bat(new Coord(34, 1), 10, 0, 5, null, LVL_2_MAP, new Coord(35, 1))).addDrop(100.00, new Special("Old silver key", "Key", 2)));

@@ -6,6 +6,7 @@
 package stickmangame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -16,6 +17,7 @@ public class StickMan implements java.io.Serializable
 
     private Coord pos;
     private ArrayList<Special> inventory = new ArrayList(0);
+    private HashMap <Special, Integer> inv = new HashMap<>();
     private Armour[] equipped = new Armour[4];
     private Weapon weapon;
     private double health;
@@ -146,6 +148,19 @@ public class StickMan implements java.io.Serializable
         return temp;
       }
 
+    public String[] getInventoryNameAndPrice()
+      {
+        Object[] invArr = inventory.toArray();
+        String[] temp = new String[invArr.length];
+
+        for (int loop = 0; loop < invArr.length; loop++)
+          {
+            Special tempSpec = (Special) invArr[loop];
+            temp[loop] = (tempSpec.getName()+ " - \t" + tempSpec.getWorth());
+          }
+        return temp;
+      }
+    
     public boolean addGold(double amount)
       {
         if (gold + amount >= 0)
