@@ -5,14 +5,10 @@
  */
 package stickmangame;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import static stickmangame.PauseMenu.setTime;
 import static stickmangame.StickManGame.getCharacterIcon;
-import static stickmangame.StickManGame.getTime;
 
 /**
  *
@@ -100,19 +96,12 @@ public class UI extends javax.swing.JFrame implements KeyListener
                     break;
                   }
               }
-          } catch (ClassNotFoundException ex)
-          {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (InstantiationException ex)
-          {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (IllegalAccessException ex)
-          {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (javax.swing.UnsupportedLookAndFeelException ex)
+          } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
           {
             java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
           }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -169,33 +158,13 @@ public class UI extends javax.swing.JFrame implements KeyListener
 
     public void moveChar(char d)
       {
-        boolean sideWays;
-        int dir = 0;
-
-        if (d == '<' || d == '>')
+         if (d == '<' || d == '>')
           {
-            sideWays = true;
+            moveHoriz((d == '>' || d == 'v') ? (1): (-1));
           } else
           {
-            sideWays = false;
+            moveVert((d == '>' || d == 'v') ? (1): (-1));
           }
-
-        if (d == '>' || d == 'v')
-          {
-            dir = (1);
-          } else
-          {
-            dir = (-1);
-          }
-
-        if (sideWays)
-          {
-            moveHoriz(dir);
-          } else
-          {
-            moveVert(dir);
-          }
-
         //  for (String map1 : map)
         //      System.out.println(map1);
       }
