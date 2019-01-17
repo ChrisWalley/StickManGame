@@ -23,14 +23,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,136 +43,109 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblBoots1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblHelm" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblChest" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblLegs" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblBoots" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" min="-2" pref="169" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane7" min="-2" pref="169" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
+                          <Component id="lblEquipped" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                                  <Component id="btnUnequip" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="lblBoots1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txfWeapon" min="-2" pref="154" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblChest" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txfChest" min="-2" pref="154" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblLegs" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txfLegs" min="-2" pref="154" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblBoots" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txfFeet" min="-2" pref="154" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblHelm" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="txfHelm" min="-2" pref="154" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btnEquip" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                                  <Component id="btnUse" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblDamage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblArmour" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblHealth" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblGold" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblGoldAmount" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lblArmourPoints" max="32767" attributes="0"/>
-                                          <Component id="lblDamagePoints" max="32767" attributes="0"/>
-                                          <Component id="lblHealthPoints" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <Component id="btnUnequipHelm" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipChest" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipLegs" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipFeet" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipWeapon" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane6" min="-2" pref="366" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
-                  <Component id="lblEquipped" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="168" pref="168" max="-2" attributes="0"/>
-                  <Component id="lblInv" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblDamage" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblArmour" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHealth" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblGold" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblArmourPoints" max="32767" attributes="0"/>
+                              <Component id="lblDamagePoints" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblHealthPoints" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="lblGoldAmount" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="1" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="btnEquip" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnUse" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace pref="61" max="32767" attributes="0"/>
+                          <Component id="lblInv" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblEquipped" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblInv" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="btnClose" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="140" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblHelm" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Component id="lblChest" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Component id="lblLegs" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Component id="lblBoots" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblInv" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="140" max="-2" attributes="0"/>
+                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblBoots1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane7" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="btnEquip" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUse" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnEquip" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnUnequip" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btnUse" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
+                          <EmptySpace pref="21" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblDamage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblDamagePoints" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -187,11 +160,47 @@
                               <Component id="lblHealth" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblHealthPoints" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblGold" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblGoldAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+                          <Component id="lblEquipped" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblHelm" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfHelm" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipHelm" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblChest" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfChest" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipChest" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblLegs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfLegs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipLegs" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblBoots" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfFeet" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipFeet" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblBoots1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfWeapon" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnUnequipWeapon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -235,7 +244,7 @@
             <Component class="javax.swing.JList" name="lstInventory">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = StickManGame.getCharacter().getInventoryString();&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
+                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = p.getInventoryString();&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -246,70 +255,6 @@
             <Property name="text" type="java.lang.String" value="Inventory"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="lstHelm">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()};&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="lstChest">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()};&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="lstLegs">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()};&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane5">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="lstFeet">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()};&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JButton" name="btnUse">
           <Properties>
             <Property name="text" type="java.lang.String" value="Use"/>
@@ -336,7 +281,9 @@
             <Component class="javax.swing.JTextArea" name="txaAction">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -346,28 +293,12 @@
             <Property name="text" type="java.lang.String" value="Weapon:"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane7">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="lstWeapon">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.AbstractListModel()&#xa;    {&#xa;        String[] strings = {StickManGame.getCharacter().getWeapon().getName()};&#xa;        public int getSize() { return strings.length; }&#xa;        public Object getElementAt(int i) { return strings[i]; }&#xa;    }" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JButton" name="btnUnequip">
+        <Component class="javax.swing.JButton" name="btnUnequipHelm">
           <Properties>
             <Property name="text" type="java.lang.String" value="Unequip"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipHelmActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDamage">
@@ -436,6 +367,63 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfHelm">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfChest">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfLegs">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfFeet">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfWeapon">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUnequipChest">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Unequip"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipChestActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUnequipLegs">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Unequip"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipLegsActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUnequipFeet">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Unequip"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipFeetActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUnequipWeapon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Unequip"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnequipWeaponActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

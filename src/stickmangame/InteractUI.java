@@ -19,19 +19,36 @@ import javax.swing.UIManager;
 public class InteractUI extends javax.swing.JFrame
   {
 
-    private static ShopKeep e;
-    private static StickMan p;
-    private static Coord co;
-    private static boolean isBuying = false;
+    private ShopKeep e;
+    private StickMan p;
+    private boolean isBuying;
 
     /**
      * Creates new form InteractUI
      */
-    public InteractUI()
+    public InteractUI(ShopKeep en)
       {
         initComponents();
-        UIManager.put("ProgressBar.foreground", Color.RED);
 
+        e = en;
+        p = StickManGame.getCharacter();
+        lblGoldAmount.setText(p.getGold() + " coins");
+        try
+          {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+              {
+                if ("Nimbus".equals(info.getName()))
+                  {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                  }
+              }
+          } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
+          {
+            java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+          }
+
+        //UIManager.put("ProgressBar.foreground", Color.RED);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter()
           {
@@ -67,7 +84,7 @@ public class InteractUI extends javax.swing.JFrame
         lblGoldAmount = new javax.swing.JLabel();
         btnSell = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstItems = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,13 +135,13 @@ public class InteractUI extends javax.swing.JFrame
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>()
+        lstItems.setModel(new javax.swing.AbstractListModel<String>()
             {
                 String[] strings = { "" };
                 public int getSize() { return strings.length; }
                 public String getElementAt(int i) { return strings[i]; }
             });
-            jScrollPane3.setViewportView(jList1);
+            jScrollPane3.setViewportView(lstItems);
 
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
             jPanel1.setLayout(jPanel1Layout);
@@ -134,28 +151,26 @@ public class InteractUI extends javax.swing.JFrame
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(0, 183, Short.MAX_VALUE)
-                            .addComponent(btnBuySell)
-                            .addGap(156, 156, 156))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnLeave)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblGold)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblGoldAmount)
-                            .addGap(28, 28, 28))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)
                                 .addComponent(btnBuy)
                                 .addComponent(btnSell))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(lblItems)
                                     .addGap(154, 154, 154))
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnLeave)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuySell)
+                            .addGap(45, 45, 45)
+                            .addComponent(lblGold)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblGoldAmount)
+                            .addContainerGap())))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,13 +191,13 @@ public class InteractUI extends javax.swing.JFrame
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                    .addComponent(btnBuySell)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblGold)
-                        .addComponent(lblGoldAmount)
-                        .addComponent(btnLeave))
-                    .addGap(14, 14, 14))
+                        .addComponent(btnBuySell)
+                        .addComponent(btnLeave)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGold)
+                            .addComponent(lblGoldAmount)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,13 +218,11 @@ public class InteractUI extends javax.swing.JFrame
     private void btnBuyActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuyActionPerformed
     {//GEN-HEADEREND:event_btnBuyActionPerformed
 
-      jList1.setModel(new javax.swing.AbstractListModel<String>()
-    {
-        String[] strings = e.getInventoryNameAndPrice();
-        public int getSize() { return strings.length; }
-        public String getElementAt(int i) { return strings[i]; }
-    });
-      
+        reloadBuy();
+        btnBuySell.setVisible(true);
+        btnBuySell.setText("Buy");
+        isBuying = true;
+
     }//GEN-LAST:event_btnBuyActionPerformed
 
     private void btnLeaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLeaveActionPerformed
@@ -222,18 +235,45 @@ public class InteractUI extends javax.swing.JFrame
 
     private void btnBuySellActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuySellActionPerformed
     {//GEN-HEADEREND:event_btnBuySellActionPerformed
-     
+
+        int index = lstItems.getSelectedIndex();
+
+        if (index > -1)
+          {
+            if (isBuying)
+              {
+
+                int worth = e.getInventory().get(index).getWorth();
+
+                if (p.addGold((-1) * worth))
+                  {
+                    p.addToInv(e.removeFromInv(index));
+                    reloadBuy();
+                  } else
+                  {
+                    JOptionPane.showMessageDialog(null, "You do not have enough gold");
+                  }
+
+              } else
+              {
+                int worth = p.getInventory().get(index).getWorth();
+
+                p.addGold(worth);
+
+                e.addToInv(p.removeFromInv(index));
+                reloadSell();
+              }
+          }
     }//GEN-LAST:event_btnBuySellActionPerformed
 
     private void btnSellActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSellActionPerformed
     {//GEN-HEADEREND:event_btnSellActionPerformed
 
-jList1.setModel(new javax.swing.AbstractListModel<String>()
-    {
-        String[] strings = p.getInventoryNameAndPrice();
-        public int getSize() { return strings.length; }
-        public String getElementAt(int i) { return strings[i]; }
-    });      
+        reloadSell();
+        btnBuySell.setVisible(true);
+        btnBuySell.setText("Sell");
+        isBuying = false;
+
 // TODO add your handling code here:
     }//GEN-LAST:event_btnSellActionPerformed
 
@@ -241,42 +281,44 @@ jList1.setModel(new javax.swing.AbstractListModel<String>()
      * @param en enemy to fight
      * @param c
      */
-    public void startUI(ShopKeep en, Coord c)
+    public void reloadSell()
       {
-        e = en;
-        co = c;
-        p = StickManGame.getCharacter();
-        lblGoldAmount.setText(p.getGold()+" coins");
-        try
+        lstItems.setModel(new javax.swing.AbstractListModel<String>()
           {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-              {
-                if ("Nimbus".equals(info.getName()))
-                  {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                  }
-              }
-          } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
-          {
-            java.util.logging.Logger.getLogger(InteractUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          }
-        //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
+            String[] strings = p.getInventoryNameCountAndPrice();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(()
-                ->
-          {
-            new InteractUI().setVisible(true);
+            public int getSize()
+              {
+                return strings.length;
+              }
+
+            public String getElementAt(int i)
+              {
+                return strings[i];
+              }
           });
+        lblGoldAmount.setText(p.getGold() + " coins");
+
       }
 
-    public void reload()
+    public void reloadBuy()
       {
+        lstItems.setModel(new javax.swing.AbstractListModel<String>()
+          {
+            String[] strings = e.getInventoryNameCountAndPrice();
+
+            public int getSize()
+              {
+                return strings.length;
+              }
+
+            public String getElementAt(int i)
+              {
+                return strings[i];
+              }
+          });
+        lblGoldAmount.setText(p.getGold() + " coins");
+
       }
 
 
@@ -288,11 +330,11 @@ jList1.setModel(new javax.swing.AbstractListModel<String>()
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblGold;
     private javax.swing.JLabel lblGoldAmount;
     private javax.swing.JLabel lblItems;
+    private javax.swing.JList<String> lstItems;
     // End of variables declaration//GEN-END:variables
 }

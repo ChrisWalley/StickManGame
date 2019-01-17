@@ -28,14 +28,25 @@ public class FightUI extends javax.swing.JFrame
 
     /**
      * Creates new form FightUI
+     *
+     * @param en mob
+     * @param c coords
      */
-    public FightUI()
+    public FightUI(MobUnit en, Coord c)
       {
+        e = en;
+        co = c;
+        p = StickManGame.getCharacter();
         initComponents();
         UIManager.put("ProgressBar.foreground", Color.GREEN);
         UIManager.put("ProgressBar.background", Color.GREEN);
+        lblEnemy.setText(e.getName());
+        lblEnemyHP.setText("" + e.getHealth());
+        lblEnemyAP.setText("" + e.getArmour());
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        reload();
 
       }
 
@@ -46,7 +57,8 @@ public class FightUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         jPanel1 = new javax.swing.JPanel();
@@ -67,6 +79,8 @@ public class FightUI extends javax.swing.JFrame
         btnFlee = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaFightText = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,12 +96,15 @@ public class FightUI extends javax.swing.JFrame
         enemyHealthBar.setForeground(Color.GREEN);
         enemyHealthBar.setMaximum(100);
         enemyHealthBar.setValue((int)(StickManGame.getCharacter().getHealth()/StickManGame.getCharacter().getMaxHealth()*100));
+        enemyHealthBar.setBackground(new java.awt.Color(255, 255, 255));
+        enemyHealthBar.setOpaque(true);
 
         PlayerHealthBar.setMinimum(0);
         PlayerHealthBar.setMaximum(100);
         PlayerHealthBar.setValue((int)(StickManGame.getCharacter().getHealth()/StickManGame.getCharacter().getMaxHealth()*100));
         PlayerHealthBar.setForeground(Color.blue);
-        PlayerHealthBar.setBackground(Color.blue);
+        PlayerHealthBar.setBackground(new java.awt.Color(255, 255, 255));
+        PlayerHealthBar.setOpaque(true);
 
         lblEnemyHealth.setText("Health:");
 
@@ -104,15 +121,19 @@ public class FightUI extends javax.swing.JFrame
         lblOptions.setText("Options:");
 
         btnAttack.setText("Attack");
-        btnAttack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAttack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAttackActionPerformed(evt);
             }
         });
 
         btnFlee.setText("Flee");
-        btnFlee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnFlee.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnFleeActionPerformed(evt);
             }
         });
@@ -126,36 +147,6 @@ public class FightUI extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(lblPlayer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEnemy)
-                .addGap(62, 62, 62))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PlayerHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPlayerHealth)
-                            .addComponent(lblPlayerArmour))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPlayerAP)
-                            .addComponent(lblPlayerHP))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enemyHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEnemyHealth)
-                            .addComponent(lblEnemyArmour))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEnemyAP)
-                            .addComponent(lblEnemyHP))))
-                .addGap(17, 17, 17))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -168,6 +159,35 @@ public class FightUI extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PlayerHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPlayerHealth)
+                            .addComponent(lblPlayerArmour))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPlayerAP)
+                            .addComponent(lblPlayerHP)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlayer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enemyHealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEnemyHealth)
+                            .addComponent(lblEnemyArmour))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEnemyAP)
+                            .addComponent(lblEnemyHP)))
+                    .addComponent(lblEnemy))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +196,11 @@ public class FightUI extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEnemy)
                     .addComponent(lblPlayer))
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerHealth)
                     .addComponent(lblPlayerHP)
@@ -201,7 +225,7 @@ public class FightUI extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFlee)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -267,65 +291,43 @@ public class FightUI extends javax.swing.JFrame
         dispose(); // TODO add your handling code here:
     }//GEN-LAST:event_btnFleeActionPerformed
 
-    /**
-     * @param en enemy to fight
-     * @param c Coords of enemy
-     */
-    public static void startFightUI(MobUnit en, Coord c)
-      {
-        e = en;
-        co = c;
-        p = StickManGame.getCharacter();// TODO add your handling code here:
-
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-          {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-              {
-                if ("Nimbus".equals(info.getName()))
-                  {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                  }
-              }
-          } catch (ClassNotFoundException ex)
-          {
-            java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (InstantiationException ex)
-          {
-            java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (IllegalAccessException ex)
-          {
-            java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (javax.swing.UnsupportedLookAndFeelException ex)
-          {
-            java.util.logging.Logger.getLogger(FightUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-          {
-            public void run()
-              {
-                new FightUI().setVisible(true);
-                lblEnemy.setText(e.getName());
-                lblEnemyHP.setText("" + e.getHealth());
-                lblEnemyAP.setText("" + e.getArmour());
-              }
-          });
-      }
-
     public void reload()
       {
         lblEnemyHP.setText("" + Math.round(e.getHealth() * 100.0) / 100.0);
         lblPlayerHP.setText("" + Math.round(p.getHealth() * 100.0) / 100.0);
-        PlayerHealthBar.setValue((int) (p.getHealth() / p.getMaxHealth() * 100));
-        enemyHealthBar.setValue((int) (e.getHealth() / e.getMaxHealth() * 100));
+        int pHealth = (int) (p.getHealth() / p.getMaxHealth() * 100);
+        int eHealth = (int) (e.getHealth() / e.getMaxHealth() * 100);
+        PlayerHealthBar.setValue(pHealth);
+        enemyHealthBar.setValue(eHealth);
+
+        if (pHealth >= 75)
+          {
+            PlayerHealthBar.setBackground(Color.GREEN);
+          } else if (pHealth < 75 && pHealth >= 50)
+          {
+            PlayerHealthBar.setBackground(Color.YELLOW);
+          } else if (pHealth < 50 && pHealth >= 25)
+          {
+            PlayerHealthBar.setBackground(Color.ORANGE);
+          } else if (pHealth < 25)
+          {
+            PlayerHealthBar.setBackground(Color.RED);
+          }
+        
+        if (eHealth >= 75)
+          {
+            enemyHealthBar.setBackground(Color.GREEN);
+          } else if (eHealth < 75 && eHealth >= 50)
+          {
+            enemyHealthBar.setBackground(Color.YELLOW);
+          } else if (eHealth < 50 && eHealth >= 25)
+          {
+            enemyHealthBar.setBackground(Color.ORANGE);
+          } else if (eHealth < 25)
+          {
+            enemyHealthBar.setBackground(Color.RED);
+          }
+
         txaFightText.setText(fightText);
 
         if (e.getHealth() <= 0 && p.getHealth() <= 0)
@@ -379,6 +381,8 @@ public class FightUI extends javax.swing.JFrame
     private javax.swing.Box.Filler filler1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private static javax.swing.JLabel lblEnemy;
     private static javax.swing.JLabel lblEnemyAP;
     private javax.swing.JLabel lblEnemyArmour;

@@ -16,9 +16,9 @@ public class Special implements java.io.Serializable
     private Coord location = null;
     private String mapID = null;
     private String type = null;
-    private boolean isUsable = false;
     private boolean hasBeenFound = false;
     private int worth = 0;
+    private int count;
 
     public Special()
       {
@@ -26,20 +26,22 @@ public class Special implements java.io.Serializable
         type = "";
       }
 
-    public Special(String nameString, String typeStr, int price)
+    public Special(String nameString, String typeStr, int price, int count)
       {
         name = nameString;
         type = typeStr;
         worth = price;
+        this.count = count;
       }
 
-    public Special(String nameString, Coord loc, String typeString, String mapIDString, int price)
+    public Special(String nameString, Coord loc, String typeString, String mapIDString, int price, int count)
       {
         name = nameString;
         location = loc;
         type = typeString;
         mapID = mapIDString;
         worth = price;
+        this.count = count;
       }
 
     public void setName(String n)
@@ -115,10 +117,6 @@ public class Special implements java.io.Serializable
     @Override
     public boolean equals(Object obj)
       {
-        if (this == obj)
-          {
-            return true;
-          }
         if (obj == null)
           {
             return false;
@@ -127,19 +125,30 @@ public class Special implements java.io.Serializable
           {
             return false;
           }
-        return true;
+        if(this.hashCode()==obj.hashCode())
+          {
+            return true;
+          }
+        return false;
+      }
+    
+    public boolean equals(Special s)
+      {
+        if (s == null)
+          {
+            return false;
+          }
+        if (getClass() != s.getClass())
+          {
+            return false;
+          }
+        if(this.getName().equals(s.getName()) && this.hashCode()==s.hashCode())
+          {
+            return true;
+          }
+        return false;
       }
 
-    public Special makeUseable()
-      {
-        this.isUsable = true;
-        return this;
-      }
-
-    public boolean isUsable()
-      {
-        return isUsable;
-      }
 
     public boolean isFound()
       {
@@ -159,5 +168,25 @@ public class Special implements java.io.Serializable
     public int getWorth()
       {
         return worth;
+      }
+
+    public int getCount()
+      {
+        return count;
+      }
+
+    public void setCount(int i)
+      {
+        count = i;
+      }
+
+    public void increaseCount()
+      {
+        count++;
+      }
+
+    public void decreaseCount()
+      {
+        count--;
       }
   }

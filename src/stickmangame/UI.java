@@ -280,14 +280,14 @@ public class UI extends javax.swing.JFrame implements KeyListener
 
     public void openInv()
       {
-        Inventory InvUI = new Inventory();
+        
         StickManGame.pause();
-        InvUI.startUI();
+        new Inventory().setVisible(true);
       }
 
     public void openPauseMenu()
       {
-        PauseMenu PauseUI = new PauseMenu();
+        new PauseMenu().setVisible(true);
         StickManGame.pause();
       }
   }

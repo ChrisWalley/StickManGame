@@ -15,9 +15,9 @@ public class Armour extends Special
     private int slot;
     private double armourPoints;
 
-    public Armour(String name, Coord location, String type, String mapID, int s, double aP, int price)
+    public Armour(String name, Coord location, String type, String mapID, int s, double aP, int price, int count)
       {
-        super(name, location, type, mapID, price);
+        super(name, location, type, mapID, price, count);
         slot = s;
         armourPoints = aP;
       }
@@ -26,9 +26,9 @@ public class Armour extends Special
       {
       }
 
-    public Armour(String name, String type, int slotInt, int aP, int price)
+    public Armour(String name, String type, int slotInt, int aP, int price, int count)
       {
-        super(name, type, price);
+        super(name, type, price, count);
         slot = slotInt;
         armourPoints = aP;
       }

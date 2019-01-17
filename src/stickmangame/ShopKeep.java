@@ -33,22 +33,37 @@ public class ShopKeep extends MobUnit
 
     public void addToInv(Special item)
       {
-        inventory.add(item);
+        if (inventory.contains(item))
+          {
+            inventory.get(inventory.indexOf(item)).increaseCount();
+          } else
+          {
+            inventory.add(item);
+          }
       }
 
     public void removeFromInv(Special item)
       {
-        inventory.remove(item);
+        if (inventory.contains(item))
+          {
+            inventory.get(inventory.indexOf(item)).decreaseCount();
+          } else
+          {
+            inventory.remove(item);
+          }
       }
 
-    public void removeFromInv(int itemIndex)
+    public Special removeFromInv(int itemIndex)
       {
-        inventory.remove(itemIndex);
-      }
 
-    public ArrayList<Special> getInv()
-      {
-        return inventory;
+        if (inventory.get(itemIndex).getCount() > 1)
+          {
+            inventory.get(itemIndex).decreaseCount();
+            return inventory.get(itemIndex);
+          } else
+          {
+            return inventory.remove(itemIndex);
+          }
       }
 
     public void setInv(ArrayList<Special> s)
@@ -64,7 +79,7 @@ public class ShopKeep extends MobUnit
         for (int loop = 0; loop < invArr.length; loop++)
           {
             Special tempSpec = (Special) invArr[loop];
-            temp[loop] = tempSpec.getName();
+            temp[loop] = tempSpec.getName() + " (x"+tempSpec.getCount()+")";
           }
         return temp;
       }
@@ -74,28 +89,28 @@ public class ShopKeep extends MobUnit
         return inventory;
       }
 
-    public String[] getInventoryPrices()
+    public int[] getInventoryPrices()
       {
         Object[] invArr = inventory.toArray();
-        String[] temp = new String[invArr.length];
+        int[] temp = new int[invArr.length];
 
         for (int loop = 0; loop < invArr.length; loop++)
           {
             Special tempSpec = (Special) invArr[loop];
-            temp[loop] = ("" + tempSpec.getWorth() * 1.5);
+            temp[loop] = (int)Math.round(tempSpec.getWorth() * 1.5);
           }
         return temp;
       }
 
-    public String[] getInventoryNameAndPrice()
+    public String[] getInventoryNameCountAndPrice()
       {
-        Object[] invArr = inventory.toArray();
+        Special[] invArr = inventory.toArray(new Special[0]);
         String[] temp = new String[invArr.length];
 
         for (int loop = 0; loop < invArr.length; loop++)
           {
             Special tempSpec = (Special) invArr[loop];
-            temp[loop] = (tempSpec.getName() + " - \t" + tempSpec.getWorth());
+            temp[loop] = (tempSpec.getName() + " - \t" + tempSpec.getWorth() + " gold - \t (x" + tempSpec.getCount()+")");
           }
         return temp;
       }

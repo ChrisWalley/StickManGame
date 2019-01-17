@@ -82,7 +82,7 @@ public class Bat extends MobUnit
     public void setDefaultDrops()
       {
         Map<Double, Special> tempDrops = new HashMap<>();
-        tempDrops.put(100.0, new Special("Bat wing", this.getPos(), "Ingredient", this.getMapID(), 2));
+        tempDrops.put(100.0, new Special("Bat wing", this.getPos(), "Ingredient", this.getMapID(), 2, 1));
         setDrops(tempDrops);
       }
 

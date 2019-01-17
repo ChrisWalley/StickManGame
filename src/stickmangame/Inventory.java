@@ -17,7 +17,7 @@ import static stickmangame.StickManGame.*;
 public class Inventory extends javax.swing.JFrame
   {
 
-    private static StickMan p;
+    private StickMan p;
 
     /**
      * Creates new form Inventory
@@ -33,10 +33,14 @@ public class Inventory extends javax.swing.JFrame
             public void windowClosing(WindowEvent e)
               {
                 StickManGame.unPauseWithBreak();
+                StickManGame.setPlayer(p);
                 dispose();
               }
           });
+        
+        loadEquipped();
       }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +49,8 @@ public class Inventory extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
         lblEquipped = new javax.swing.JLabel();
@@ -56,22 +61,12 @@ public class Inventory extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         lstInventory = new javax.swing.JList();
         lblInv = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstHelm = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstChest = new javax.swing.JList();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lstLegs = new javax.swing.JList();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        lstFeet = new javax.swing.JList();
         btnUse = new javax.swing.JButton();
         btnEquip = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         txaAction = new javax.swing.JTextArea();
         lblBoots1 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        lstWeapon = new javax.swing.JList();
-        btnUnequip = new javax.swing.JButton();
+        btnUnequipHelm = new javax.swing.JButton();
         lblDamage = new javax.swing.JLabel();
         lblArmour = new javax.swing.JLabel();
         lblHealth = new javax.swing.JLabel();
@@ -81,6 +76,15 @@ public class Inventory extends javax.swing.JFrame
         lblGold = new javax.swing.JLabel();
         lblGoldAmount = new javax.swing.JLabel();
         btnClose = new javax.swing.JButton();
+        txfHelm = new javax.swing.JTextField();
+        txfChest = new javax.swing.JTextField();
+        txfLegs = new javax.swing.JTextField();
+        txfFeet = new javax.swing.JTextField();
+        txfWeapon = new javax.swing.JTextField();
+        btnUnequipChest = new javax.swing.JButton();
+        btnUnequipLegs = new javax.swing.JButton();
+        btnUnequipFeet = new javax.swing.JButton();
+        btnUnequipWeapon = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,7 +100,7 @@ public class Inventory extends javax.swing.JFrame
 
         lstInventory.setModel(new javax.swing.AbstractListModel()
             {
-                String[] strings = StickManGame.getCharacter().getInventoryString();
+                String[] strings = p.getInventoryString();
                 public int getSize() { return strings.length; }
                 public Object getElementAt(int i) { return strings[i]; }
             });
@@ -104,348 +108,296 @@ public class Inventory extends javax.swing.JFrame
 
             lblInv.setText("Inventory");
 
-            lstHelm.setModel(new javax.swing.AbstractListModel()
+            btnUse.setText("Use");
+            btnUse.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
-                    String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()};
-                    public int getSize() { return strings.length; }
-                    public Object getElementAt(int i) { return strings[i]; }
-                });
-                jScrollPane2.setViewportView(lstHelm);
+                    btnUseActionPerformed(evt);
+                }
+            });
 
-                lstChest.setModel(new javax.swing.AbstractListModel()
-                    {
-                        String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()};
-                        public int getSize() { return strings.length; }
-                        public Object getElementAt(int i) { return strings[i]; }
-                    });
-                    jScrollPane3.setViewportView(lstChest);
+            btnEquip.setText("Equip");
+            btnEquip.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnEquipActionPerformed(evt);
+                }
+            });
 
-                    lstLegs.setModel(new javax.swing.AbstractListModel()
-                        {
-                            String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()};
-                            public int getSize() { return strings.length; }
-                            public Object getElementAt(int i) { return strings[i]; }
-                        });
-                        jScrollPane4.setViewportView(lstLegs);
+            txaAction.setColumns(20);
+            txaAction.setLineWrap(true);
+            txaAction.setRows(5);
+            txaAction.setWrapStyleWord(true);
+            jScrollPane6.setViewportView(txaAction);
 
-                        lstFeet.setModel(new javax.swing.AbstractListModel()
-                            {
-                                String[] strings = {StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()};
-                                public int getSize() { return strings.length; }
-                                public Object getElementAt(int i) { return strings[i]; }
-                            });
-                            jScrollPane5.setViewportView(lstFeet);
+            lblBoots1.setText("Weapon:");
 
-                            btnUse.setText("Use");
-                            btnUse.addActionListener(new java.awt.event.ActionListener() {
-                                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                    btnUseActionPerformed(evt);
-                                }
-                            });
+            btnUnequipHelm.setText("Unequip");
+            btnUnequipHelm.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnUnequipHelmActionPerformed(evt);
+                }
+            });
 
-                            btnEquip.setText("Equip");
-                            btnEquip.addActionListener(new java.awt.event.ActionListener() {
-                                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                    btnEquipActionPerformed(evt);
-                                }
-                            });
+            lblDamage.setText("Damage:");
 
-                            txaAction.setColumns(20);
-                            txaAction.setRows(5);
-                            jScrollPane6.setViewportView(txaAction);
+            lblArmour.setText("Armour:");
 
-                            lblBoots1.setText("Weapon:");
+            lblHealth.setText("Health:");
 
-                            lstWeapon.setModel(new javax.swing.AbstractListModel()
-                                {
-                                    String[] strings = {StickManGame.getCharacter().getWeapon().getName()};
-                                    public int getSize() { return strings.length; }
-                                    public Object getElementAt(int i) { return strings[i]; }
-                                });
-                                jScrollPane7.setViewportView(lstWeapon);
+            lblDamagePoints.setText(""+p.getDamage());
 
-                                btnUnequip.setText("Unequip");
-                                btnUnequip.addActionListener(new java.awt.event.ActionListener() {
-                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                        btnUnequipActionPerformed(evt);
-                                    }
-                                });
+            lblArmourPoints.setText(""+p.getArmour());
 
-                                lblDamage.setText("Damage:");
+            lblHealthPoints.setText(""+p.getHealth());
 
-                                lblArmour.setText("Armour:");
+            lblGold.setText("Gold:");
 
-                                lblHealth.setText("Health:");
+            lblGoldAmount.setText(""+p.getGold());
 
-                                lblDamagePoints.setText(""+p.getDamage());
+            btnClose.setText("Close");
+            btnClose.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnCloseActionPerformed(evt);
+                }
+            });
 
-                                lblArmourPoints.setText(""+p.getArmour());
+            txfHelm.setEditable(false);
 
-                                lblHealthPoints.setText(""+p.getHealth());
+            txfChest.setEditable(false);
 
-                                lblGold.setText("Gold:");
+            txfLegs.setEditable(false);
 
-                                lblGoldAmount.setText(""+p.getGold());
+            txfFeet.setEditable(false);
 
-                                btnClose.setText("Close");
-                                btnClose.addActionListener(new java.awt.event.ActionListener() {
-                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                        btnCloseActionPerformed(evt);
-                                    }
-                                });
+            txfWeapon.setEditable(false);
 
-                                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                                jPanel1.setLayout(jPanel1Layout);
-                                jPanel1Layout.setHorizontalGroup(
-                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblBoots1)
-                                                    .addComponent(lblHelm)
-                                                    .addComponent(lblChest)
-                                                    .addComponent(lblLegs)
-                                                    .addComponent(lblBoots))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(129, 129, 129)
-                                                        .addComponent(btnUnequip))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addContainerGap()
-                                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(27, 27, 27)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(btnEquip)
-                                                        .addGap(21, 21, 21)
-                                                        .addComponent(btnUse))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(lblDamage)
-                                                            .addComponent(lblArmour)
-                                                            .addComponent(lblHealth)
-                                                            .addComponent(lblGold))
-                                                        .addGap(24, 24, 24)
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(lblGoldAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(lblArmourPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(lblDamagePoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(lblHealthPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                                        .addContainerGap())
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(lblEquipped)
-                                        .addGap(168, 168, 168)
-                                        .addComponent(lblInv)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnClose))
-                                );
-                                jPanel1Layout.setVerticalGroup(
-                                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblEquipped)
-                                                    .addComponent(lblInv)))
-                                            .addComponent(btnClose))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(8, 8, 8)
-                                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(8, 8, 8)
-                                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(7, 7, 7)
-                                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(lblHelm)
-                                                        .addGap(12, 12, 12)
-                                                        .addComponent(lblChest)
-                                                        .addGap(12, 12, 12)
-                                                        .addComponent(lblLegs)
-                                                        .addGap(12, 12, 12)
-                                                        .addComponent(lblBoots)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblBoots1)
-                                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGap(4, 4, 4)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(btnEquip)
-                                                .addComponent(btnUnequip))
-                                            .addComponent(btnUse))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblDamage)
-                                                    .addComponent(lblDamagePoints))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblArmour)
-                                                    .addComponent(lblArmourPoints))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblHealth)
-                                                    .addComponent(lblHealthPoints))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(lblGold)
-                                                    .addComponent(lblGoldAmount))))
-                                        .addContainerGap())
-                                );
+            btnUnequipChest.setText("Unequip");
+            btnUnequipChest.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnUnequipChestActionPerformed(evt);
+                }
+            });
 
-                                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                                getContentPane().setLayout(layout);
-                                layout.setHorizontalGroup(
-                                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                );
-                                layout.setVerticalGroup(
-                                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                );
+            btnUnequipLegs.setText("Unequip");
+            btnUnequipLegs.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnUnequipLegsActionPerformed(evt);
+                }
+            });
 
-                                pack();
-                                setLocationRelativeTo(null);
-                            }// </editor-fold>//GEN-END:initComponents
+            btnUnequipFeet.setText("Unequip");
+            btnUnequipFeet.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnUnequipFeetActionPerformed(evt);
+                }
+            });
+
+            btnUnequipWeapon.setText("Unequip");
+            btnUnequipWeapon.addActionListener(new java.awt.event.ActionListener()
+            {
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    btnUnequipWeaponActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+            jPanel1.setLayout(jPanel1Layout);
+            jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(43, 43, 43)
+                            .addComponent(lblEquipped))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblBoots1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txfWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblChest)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txfChest, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblLegs)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txfLegs, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblBoots)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txfFeet, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblHelm)
+                                    .addGap(50, 50, 50)
+                                    .addComponent(txfHelm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnUnequipHelm)
+                                .addComponent(btnUnequipChest)
+                                .addComponent(btnUnequipLegs)
+                                .addComponent(btnUnequipFeet)
+                                .addComponent(btnUnequipWeapon)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(29, 29, 29)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblDamage)
+                                .addComponent(lblArmour)
+                                .addComponent(lblHealth)
+                                .addComponent(lblGold))
+                            .addGap(24, 24, 24)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblArmourPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDamagePoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblHealthPoints)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(lblGoldAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnEquip)
+                            .addGap(21, 21, 21)
+                            .addComponent(btnUse)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                            .addComponent(lblInv)
+                            .addGap(46, 46, 46)
+                            .addComponent(btnClose)))
+                    .addContainerGap())
+            );
+            jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnClose)
+                                .addComponent(lblInv))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnEquip)
+                                .addComponent(btnUse))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblDamage)
+                                .addComponent(lblDamagePoints))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblArmour)
+                                .addComponent(lblArmourPoints))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblHealth)
+                                .addComponent(lblHealthPoints))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblGold)
+                                .addComponent(lblGoldAmount)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addComponent(lblEquipped)
+                            .addGap(22, 22, 22)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblHelm)
+                                .addComponent(txfHelm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUnequipHelm))
+                            .addGap(3, 3, 3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblChest)
+                                .addComponent(txfChest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUnequipChest))
+                            .addGap(3, 3, 3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblLegs)
+                                .addComponent(txfLegs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUnequipLegs))
+                            .addGap(3, 3, 3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblBoots)
+                                .addComponent(txfFeet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUnequipFeet))
+                            .addGap(13, 13, 13)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblBoots1)
+                                .addComponent(txfWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUnequipWeapon))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap())
+            );
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 3, Short.MAX_VALUE))
+            );
+
+            pack();
+            setLocationRelativeTo(null);
+        }// </editor-fold>//GEN-END:initComponents
 
     private void btnEquipActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEquipActionPerformed
     {//GEN-HEADEREND:event_btnEquipActionPerformed
 
-        if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Armour.class)
+        Special item = p.getInventory().get(lstInventory.getSelectedIndex());
+        if (item.getClass() == Armour.class)
           {
-            Armour a = (Armour) StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
-            StickManGame.getCharacter().equip(a, a.getSlot());
+            Armour a = (Armour) p.removeFromInv(lstInventory.getSelectedIndex());
+            p.equip(a, a.getSlot());
             switch (a.getSlot())
               {
                 case HELM:
-                    lstHelm.setModel(new javax.swing.AbstractListModel()
-                      {
-                        String[] strings =
-                          {
-                            StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()
-                          };
-
-                        public int getSize()
-                          {
-                            return strings.length;
-                          }
-
-                        public Object getElementAt(int i)
-                          {
-                            return strings[i];
-                          }
-                      });
+                    txfHelm.setText(a.getName());
                     break;
 
                 case CHEST:
-                    lstChest.setModel(new javax.swing.AbstractListModel()
-                      {
-                        String[] strings =
-                          {
-                            StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()
-                          };
-
-                        public int getSize()
-                          {
-                            return strings.length;
-                          }
-
-                        public Object getElementAt(int i)
-                          {
-                            return strings[i];
-                          }
-                      });
+                    txfChest.setText(a.getName());
                     break;
 
                 case LEGS:
-                    lstLegs.setModel(new javax.swing.AbstractListModel()
-                      {
-                        String[] strings =
-                          {
-                            StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()
-                          };
-
-                        public int getSize()
-                          {
-                            return strings.length;
-                          }
-
-                        public Object getElementAt(int i)
-                          {
-                            return strings[i];
-                          }
-                      });
+                    txfLegs.setText(a.getName());
                     break;
 
                 case FEET:
-                    lstFeet.setModel(new javax.swing.AbstractListModel()
-                      {
-                        String[] strings =
-                          {
-                            StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()
-                          };
-
-                        public int getSize()
-                          {
-                            return strings.length;
-                          }
-
-                        public Object getElementAt(int i)
-                          {
-                            return strings[i];
-                          }
-                      });
+                    txfFeet.setText(a.getName());
                     break;
               }
             txaAction.setText("Equipped " + a.getName());
-          } else if (StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex()).getClass() == Weapon.class)
+          } else if (p.getInventory().get(lstInventory.getSelectedIndex()).getClass() == Weapon.class)
           {
-            Weapon a = (Weapon) StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
-            StickManGame.getCharacter().setWeapon(a);
-            lstWeapon.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getWeapon().getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
+            Weapon a = (Weapon) p.removeFromInv(lstInventory.getSelectedIndex());
+            p.setWeapon(a);
+            txfWeapon.setText(a.getName());
             txaAction.setText("Equipped " + a.getName());
 
           } else
@@ -457,202 +409,116 @@ public class Inventory extends javax.swing.JFrame
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEquipActionPerformed
 
-    private void btnUnequipActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipActionPerformed
-    {//GEN-HEADEREND:event_btnUnequipActionPerformed
-        if (!lstHelm.isSelectionEmpty())
-          {
-            StickManGame.getCharacter().unEquip(HELM);
-            lstHelm.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getEquipped(StickManGame.HELM).getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
-            txaAction.setText("Un-equipped Helm");
-          } else if (!lstChest.isSelectionEmpty())
-          {
-            StickManGame.getCharacter().unEquip(CHEST);
-            lstChest.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getEquipped(StickManGame.CHEST).getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
-            txaAction.setText("Un-equipped Chestpiece");
-          } else if (!lstLegs.isSelectionEmpty())
-          {
-            StickManGame.getCharacter().unEquip(LEGS);
-            lstLegs.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getEquipped(StickManGame.LEGS).getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
-            txaAction.setText("Un-equipped Leggings");
-          } else if (!lstFeet.isSelectionEmpty())
-          {
-            StickManGame.getCharacter().unEquip(FEET);
-            lstFeet.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getEquipped(StickManGame.FEET).getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
-            txaAction.setText("Un-equipped Boots");
-          } else if (!lstWeapon.isSelectionEmpty())
-          {
-            StickManGame.getCharacter().unEquipWeapon();
-            lstWeapon.setModel(new javax.swing.AbstractListModel()
-              {
-                String[] strings =
-                  {
-                    StickManGame.getCharacter().getWeapon().getName()
-                  };
-
-                public int getSize()
-                  {
-                    return strings.length;
-                  }
-
-                public Object getElementAt(int i)
-                  {
-                    return strings[i];
-                  }
-              });
-            txaAction.setText("Un-equipped Weapon");
-          }
+    private void btnUnequipHelmActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipHelmActionPerformed
+    {//GEN-HEADEREND:event_btnUnequipHelmActionPerformed
+        p.unEquip(HELM);
+        txfHelm.setText("");
         reload();
-    }//GEN-LAST:event_btnUnequipActionPerformed
+    }//GEN-LAST:event_btnUnequipHelmActionPerformed
 
     private void btnUseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUseActionPerformed
     {//GEN-HEADEREND:event_btnUseActionPerformed
 
-        Special e = StickManGame.getCharacter().getInventory().get(lstInventory.getSelectedIndex());
-        if (e.isUsable())
+        Special e = p.getInventory().get(lstInventory.getSelectedIndex());
+        if (e.getClass().equals(Useable.class))
           {
-            txaAction.setText(StickManGame.use(e));
+            Useable item = (Useable) p.getInventory().get(lstInventory.getSelectedIndex());
+            item.use();
+            if(item.getUses() < 1)
+              {
+                p.getInventory().remove(lstInventory.getSelectedIndex());
+              }
+            else
+              {
+                p.getInventory().set(lstInventory.getSelectedIndex(), item);
+              }
+            txaAction.setText(StickManGame.use(item));
           } else
           {
             txaAction.setText("You cannot use this item");
           }
+        reload();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUseActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         StickManGame.unPauseWithBreak();
+        StickManGame.setPlayer(p);
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void startUI()
-      {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-          {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-              {
-                if ("Nimbus".equals(info.getName()))
-                  {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                  }
-              }
-          } catch (ClassNotFoundException ex)
-          {
-            java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (InstantiationException ex)
-          {
-            java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (IllegalAccessException ex)
-          {
-            java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          } catch (javax.swing.UnsupportedLookAndFeelException ex)
-          {
-            java.util.logging.Logger.getLogger(Inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-          }
-        //</editor-fold>
+    private void btnUnequipChestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipChestActionPerformed
+    {//GEN-HEADEREND:event_btnUnequipChestActionPerformed
+        p.unEquip(CHEST);
+        txfChest.setText("");
+        reload();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUnequipChestActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-          {
-            public void run()
-              {
-                new Inventory().setVisible(true);
-              }
-          });
-      }
+    private void btnUnequipLegsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipLegsActionPerformed
+    {//GEN-HEADEREND:event_btnUnequipLegsActionPerformed
+        p.unEquip(LEGS);
+        txfLegs.setText("");
+        reload();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUnequipLegsActionPerformed
 
-    public static void reload()
+    private void btnUnequipFeetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipFeetActionPerformed
+    {//GEN-HEADEREND:event_btnUnequipFeetActionPerformed
+        p.unEquip(FEET);
+        txfFeet.setText("");
+        reload();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUnequipFeetActionPerformed
+
+    private void btnUnequipWeaponActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUnequipWeaponActionPerformed
+    {//GEN-HEADEREND:event_btnUnequipWeaponActionPerformed
+        p.unEquipWeapon();
+        txfWeapon.setText("");
+        reload();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUnequipWeaponActionPerformed
+
+    public void reload()
       {
         lblArmourPoints.setText("" + p.getArmour());
         lblDamagePoints.setText("" + p.getDamage());
         lblHealthPoints.setText("" + p.getHealth());
+
+        lstInventory.setModel(new javax.swing.AbstractListModel()
+          {
+            String[] strings = p.getInventoryString();
+
+            public int getSize()
+              {
+                return strings.length;
+              }
+
+            public Object getElementAt(int i)
+              {
+                return strings[i];
+              }
+          });
+      }
+    
+    public void loadEquipped()
+      {
+        txfHelm.setText(p.getEquipped(HELM)!= null ? p.getEquipped(HELM).getName():"");
+        txfChest.setText(p.getEquipped(CHEST)!= null ? p.getEquipped(CHEST).getName():"");
+        txfLegs.setText(p.getEquipped(LEGS)!= null ? p.getEquipped(LEGS).getName():"");
+        txfFeet.setText(p.getEquipped(FEET)!= null ? p.getEquipped(FEET).getName():"");
+        txfWeapon.setText(p.getWeapon()!= null ? p.getWeapon().getName():"");
       }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEquip;
-    private javax.swing.JButton btnUnequip;
+    private javax.swing.JButton btnUnequipChest;
+    private javax.swing.JButton btnUnequipFeet;
+    private javax.swing.JButton btnUnequipHelm;
+    private javax.swing.JButton btnUnequipLegs;
+    private javax.swing.JButton btnUnequipWeapon;
     private javax.swing.JButton btnUse;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lblArmour;
     private static javax.swing.JLabel lblArmourPoints;
     private javax.swing.JLabel lblBoots;
@@ -668,12 +534,12 @@ public class Inventory extends javax.swing.JFrame
     private javax.swing.JLabel lblHelm;
     private javax.swing.JLabel lblInv;
     private javax.swing.JLabel lblLegs;
-    private javax.swing.JList lstChest;
-    private javax.swing.JList lstFeet;
-    private javax.swing.JList lstHelm;
     private javax.swing.JList lstInventory;
-    private javax.swing.JList lstLegs;
-    private javax.swing.JList lstWeapon;
     private javax.swing.JTextArea txaAction;
+    private javax.swing.JTextField txfChest;
+    private javax.swing.JTextField txfFeet;
+    private javax.swing.JTextField txfHelm;
+    private javax.swing.JTextField txfLegs;
+    private javax.swing.JTextField txfWeapon;
     // End of variables declaration//GEN-END:variables
 }

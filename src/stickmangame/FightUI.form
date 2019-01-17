@@ -56,46 +56,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Component id="lblPlayer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="lblEnemy" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="PlayerHealthBar" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblPlayerHealth" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPlayerArmour" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblPlayerAP" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPlayerHP" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="enemyHealthBar" min="-2" pref="154" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblEnemyHealth" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEnemyArmour" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblEnemyAP" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEnemyHP" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -114,6 +74,44 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="PlayerHealthBar" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblPlayerHealth" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPlayerArmour" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblPlayerAP" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPlayerHP" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jSeparator1" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="lblPlayer" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSeparator2" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Component id="enemyHealthBar" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblEnemyHealth" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEnemyArmour" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblEnemyAP" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEnemyHP" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="lblEnemy" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -124,7 +122,12 @@
                       <Component id="lblEnemy" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPlayerHealth" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPlayerHP" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -153,7 +156,7 @@
                           <Component id="btnFlee" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" pref="116" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="114" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -190,6 +193,12 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JProgressBar" name="enemyHealthBar">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="opaque" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="enemyHealthBar.setMinimum(0);&#xa;enemyHealthBar.setForeground(Color.GREEN);&#xa;enemyHealthBar.setMaximum(100);&#xa;enemyHealthBar.setValue((int)(StickManGame.getCharacter().getHealth()/StickManGame.getCharacter().getMaxHealth()*100));"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
@@ -197,9 +206,10 @@
         </Component>
         <Component class="javax.swing.JProgressBar" name="PlayerHealthBar">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Color.blue" type="code"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="PlayerHealthBar.setMinimum(0);&#xa;PlayerHealthBar.setMaximum(100);&#xa;PlayerHealthBar.setValue((int)(StickManGame.getCharacter().getHealth()/StickManGame.getCharacter().getMaxHealth()*100));&#xa;PlayerHealthBar.setForeground(Color.blue);"/>
@@ -287,6 +297,10 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

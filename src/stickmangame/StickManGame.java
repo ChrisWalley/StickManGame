@@ -288,7 +288,8 @@ public class StickManGame
                 Coord[] s
                         =
                           {
-                            new Coord(0, 7), new Coord(0, 8), new Coord(0, 9), new Coord(0, 10)
+                            //new Coord(0, 7), new Coord(0, 8), new Coord(0, 9), new Coord(0, 10)
+                            new Coord(0, 8)
                           };
                 reveal(s, '<');
                 break;
@@ -369,22 +370,29 @@ public class StickManGame
 
     public static void populateArrays()
       {
+
+        //System.out.println("TESTING EQUALS: "+(new Weapon("Iron sword", "Weapon", 10, 10, 1).equals(new Weapon("Wooden sword", "Weapon", 3, 2, 1))));
+        //System.out.println("TESTING EQUALS: "+(new Weapon("Iron sword", "Weapon", 10, 10, 1).equals(new Weapon("Iron sword", "Weapon", 10, 10, 1))));
         //items
-        items.add(new Special("The Map of Arkangthamz", new Coord(19, 12), "Map", START_MAP, 15).makeUseable());
+        items.add(new Useable("The Map of Arkangthamz", new Coord(19, 12), "Map", START_MAP, 15, 1, 1,
+                "As you unfurl the map, golden symbols shimmer across the parchment. It crumbles in your hands, "
+                + "but you are imparted with the knowledge of hidden passageways through the mountains to the east."
+        ));
 
         //weapons
-        weapons.add(new Weapon("Stone sword", new Coord(14, 2), "Weapon", START_MAP, 4, 5));
+        weapons.add(new Weapon("Stone sword", new Coord(14, 2), "Weapon", START_MAP, 4, 5, 1));
 
         //armour
         //mobs
         mobs.add(new Bat(new Coord(3, 9), 10, 0, 5, null, START_MAP, new Coord(3, 10)));
-        mobs.add((new Bat(new Coord(34, 1), 10, 0, 5, null, LVL_2_MAP, new Coord(35, 1))).addDrop(100.00, new Special("Old silver key", "Key", 2)));
+        mobs.add((new Bat(new Coord(34, 1), 10, 0, 5, null, LVL_2_MAP, new Coord(35, 1))).addDrop(100.00, new Special("Old silver key", "Key", 2, 1)));
         mobs.add(new Bat(new Coord(11, 1), 10, 0, 5, null, LVL_2_MAP, new Coord(11, 2)));
 
         ShopKeep Marvin = new ShopKeep(new Coord(15, 15), LVL_2_MAP, "Marvin - Shopkeeper");
-        Marvin.addToInv(new Weapon("Iron sword", "Weapon", 10, 10));
-        Marvin.addToInv(new Armour("Leather Chestpiece", "Weapon", CHEST, 3, 10));
-        Marvin.addToInv(new Weapon("Wooden sword", "Weapon", 3, 2));
+        Marvin.addToInv(new Weapon("Iron sword", "Weapon", 10, 10, 1));
+        Marvin.addToInv(new Armour("Leather Chestpiece", "Weapon", CHEST, 3, 10, 1));
+        Marvin.addToInv(new Weapon("Wooden sword", "Weapon", 3, 2, 1));
+        Marvin.addToInv(new Useable("Small Health Potion", "Potion", 25, 1, 1, "You have been healed by the Small Potion"));
         mobs.add(Marvin);
 
       }
@@ -424,9 +432,8 @@ public class StickManGame
               {
                 MobUnit temp = mobs.get(loop);
                 Coord c = temp.getCurrPos();
-                JOptionPane.showMessageDialog(null, "You have encountered a " + temp.getName() + "\nHealth: " + temp.getHealth() + "\tArmour: " + temp.getArmour());
-                FightUI fight = new FightUI();
-                fight.startFightUI(temp, c);
+                JOptionPane.showMessageDialog(null, "You have encountered a " + temp.getName() + "\nHealth: " + temp.getHealth() + "\nArmour: " + temp.getArmour());
+                new FightUI(temp, c).setVisible(true);
                 break;
               }
           }
@@ -443,9 +450,8 @@ public class StickManGame
             if (tempCoord.equals(tempC))
               {
                 MobUnit temp = mobs.get(loop);
-                JOptionPane.showMessageDialog(null, "You have encountered a " + temp.getName() + "\nHealth: " + temp.getHealth() + "\tArmour: " + temp.getArmour());
-                FightUI fight = new FightUI();
-                fight.startFightUI(temp, c);
+                JOptionPane.showMessageDialog(null, "You have encountered a " + temp.getName() + "\nHealth: " + temp.getHealth() + "\nArmour: " + temp.getArmour());
+                new FightUI(temp, c).setVisible(true);
                 break;
               }
           }
@@ -454,7 +460,6 @@ public class StickManGame
     public static void encounteredFriend(Coord tempC)
       {
         pause();
-        Coord c = tempC;
         for (int loop = 0; loop < mobs.size(); loop++)
           {
 
@@ -463,8 +468,7 @@ public class StickManGame
               {
                 ShopKeep temp = (ShopKeep) mobs.get(loop);
                 JOptionPane.showMessageDialog(null, "You have encountered a " + temp.getName());
-                InteractUI interaction = new InteractUI();
-                interaction.startUI(temp, c);
+                new InteractUI(temp).setVisible(true);
                 break;
               }
           }
@@ -541,7 +545,7 @@ public class StickManGame
         MainMan = s;
       }
 
-    public static String use(Special s)
+    public static String use(Useable s)
       {
         switch (s.getName())
           {
@@ -551,13 +555,14 @@ public class StickManGame
                     Coord[] coords
                             =
                               {
-                                new Coord(37, 7), new Coord(37, 8), new Coord(37, 9), new Coord(37, 10)
+                                //new Coord(37, 7), new Coord(37, 8), new Coord(37, 9), new Coord(37, 10)
+                                new Coord(37, 8)
                               };
                     reveal(coords, '>');
-                    return "You look over the map,\nand discover an open\npassage to the East";
+                    return s.getItemText();
                   } else
                   {
-                    return "You can't use this item\nin this area";
+                    return "You can't use this item in this area";
                   }
 
           }

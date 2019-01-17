@@ -30,9 +30,6 @@ class UpdateThread implements Runnable
                 if (!StickManGame.areUpdatesPaused())
                   {
                     StickManGame.updateMobs();
-                  } else
-                  {
-                    UI.reDraw();
                   }
                 UI.reDraw();
               }

@@ -14,20 +14,20 @@ public class Weapon extends Special
 
     private double damage;
 
-    public Weapon(String name, Coord location, String type, String map, double damageDouble, int price)
+    public Weapon(String name, Coord location, String type, String map, double damageDouble, int price, int count)
       {
-        super(name, location, type, map, price);
+        super(name, location, type, map, price, count);
         damage = damageDouble;
       }
 
     public Weapon()
       {
-        this.setName("");
+        super();
       }
 
-    public Weapon(String name, String type, double dam, int price)
+    public Weapon(String name, String type, double dam, int price, int count)
       {
-        super(name, type, price);
+        super(name, type, price, count);
         damage = dam;
       }
 
